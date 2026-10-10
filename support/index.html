@@ -47,8 +47,12 @@
           <h2>Purchases &amp; Restore</h2>
           <p>
             RoamXP purchases and subscriptions are processed by Apple through
-            StoreKit. RoamXP does not handle your payment card details.
-            Superwall is not integrated.
+            StoreKit (including via expo-iap). RoamXP does not handle your
+            payment card details. Superwall is integrated for
+            subscription-related infrastructure and entitlement sync; native
+            paywalls remain active, and remote Superwall paywalls are not
+            currently presented. Superwall is not used for advertising
+            tracking.
           </p>
           <p>
             If an eligible purchase or subscription is missing after reinstall

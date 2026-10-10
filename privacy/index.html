@@ -189,8 +189,27 @@
             not sent to PostHog.
           </p>
           <p>
-            Superwall is not integrated in the current implementation. No
-            advertising or attribution SDK was found for purchase attribution.
+            RoamXP integrates Superwall (via expo-superwall / SuperwallKit) as
+            subscription-related infrastructure, including Custom Purchase
+            Controller support and premium entitlement synchronization.
+            Purchases and payment processing remain through Apple’s StoreKit /
+            the App Store (including via expo-iap). RoamXP’s existing native
+            paywalls remain in use; remote Superwall paywalls or placements are
+            not currently presented.
+          </p>
+          <p>
+            When Superwall is enabled, subscription status and other relevant
+            technical information may be processed by Superwall so entitlement
+            state can stay in sync. RoamXP configures Superwall to limit
+            external data collection where the SDK allows, but Superwall may
+            still process technical or subscription-related information needed
+            for its infrastructure. RoamXP does not currently use Superwall for
+            advertising tracking.
+          </p>
+          <p>
+            Journal content, HealthKit records, and Screen Time / Family
+            Controls selections or tokens are not intentionally sent to
+            Superwall.
           </p>
 
           <h2>9. Notifications</h2>
