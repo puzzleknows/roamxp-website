@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy — RoamXP</title>
+    <meta
+      name="description"
+      content="RoamXP Privacy Policy: how the local-first app and website handle information, analytics, HealthKit, purchases, and related practices."
+    />
+    <meta name="theme-color" content="#0b0d10" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../">Roam<span class="brand__mark">XP</span></a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../#features">Features</a>
+          <a href="../support/">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="page">
+      <div class="page__inner">
+        <h1>Privacy Policy</h1>
+        <div class="policy-meta">
+          <p><strong>Effective date:</strong> October 9, 2026</p>
+          <p><strong>Operator:</strong> Oleg Pyshenkin</p>
+        </div>
+
+        <article class="policy">
+          <h2>1. Introduction</h2>
+          <p>
+            This Privacy Policy explains how RoamXP (“RoamXP,” “we,” “us,” or
+            “our”) handles information in connection with the RoamXP mobile
+            application and this website. It describes current product behavior
+            as implemented today. It is not a guarantee that every practice will
+            remain unchanged forever.
+          </p>
+          <p>
+            RoamXP is designed as a local-first experience. There is currently
+            no RoamXP user account system and no RoamXP-operated backend or cloud
+            storage for your app content. Limited anonymous or pseudonymous
+            product analytics are collected through PostHog, as described below.
+          </p>
+
+          <h2>2. Local-First Design</h2>
+          <p>
+            RoamXP is built so that your core content and activity stay on your
+            device. RoamXP does not currently operate a RoamXP account login
+            system, and no RoamXP backend or cloud storage for app content was
+            found in the current implementation.
+          </p>
+          <p>
+            Local app data may also be included in device backups depending on
+            your Apple and iCloud backup settings.
+          </p>
+
+          <h2>3. Information Stored on Your Device</h2>
+          <p>Depending on how you use RoamXP, the app may store locally:</p>
+          <ul>
+            <li>journal text</li>
+            <li>journal photos</li>
+            <li>journal audio</li>
+            <li>nutrition logs</li>
+            <li>workout logs</li>
+            <li>goals</li>
+            <li>progression / XP</li>
+            <li>campaign state</li>
+            <li>achievements</li>
+            <li>onboarding state</li>
+            <li>step totals</li>
+            <li>Screen Time / Family Controls selections</li>
+            <li>preferences</li>
+            <li>entitlement/cache state</li>
+          </ul>
+          <p>
+            This information is used to provide RoamXP features on your device.
+            Local app data may also be included in device backups depending on
+            your Apple and iCloud backup settings.
+          </p>
+
+          <h2>4. Journal and User Content</h2>
+          <p>
+            Journal text is stored locally on your device. Journal photos and
+            journal audio are also stored locally. RoamXP does not upload this
+            content to a RoamXP server. This content is not sent to PostHog.
+          </p>
+
+          <h2>5. Apple HealthKit</h2>
+          <p>
+            RoamXP may request Apple HealthKit permission to read step count
+            only. In the current implementation, RoamXP does not write data to
+            HealthKit.
+          </p>
+          <p>
+            Step values are used locally for walking, Journey, and progression
+            features. Raw HealthKit values are not sent to PostHog. HealthKit
+            data is not used for advertising and is not sold.
+          </p>
+          <p>
+            RoamXP is not a medical device and does not provide medical advice,
+            diagnosis, or treatment.
+          </p>
+
+          <h2>6. Screen Time and Focus Features</h2>
+          <p>
+            For Focus and distraction-protection features, RoamXP uses Apple
+            APIs such as FamilyControls, ManagedSettings, and DeviceActivity.
+          </p>
+          <p>
+            Related selections and tokens are stored locally and, where
+            required by Apple, in Apple App Group storage. Selected app or
+            category identities and opaque tokens are not sent to PostHog. This
+            information is not used for advertising.
+          </p>
+
+          <h2>7. Product Analytics</h2>
+          <p>
+            RoamXP currently uses PostHog for limited anonymous or
+            pseudonymous product analytics. This helps understand onboarding,
+            feature use, and subscription-related interactions so the product
+            can be improved.
+          </p>
+          <p>Analytics may include:</p>
+          <ul>
+            <li>onboarding progress</li>
+            <li>onboarding screen/step metadata</li>
+            <li>explicitly instrumented feature interactions</li>
+            <li>coarse paywall/subscription interactions</li>
+            <li>purchase/restore status</li>
+            <li>permission outcomes</li>
+            <li>app version</li>
+            <li>build number</li>
+            <li>platform</li>
+            <li>OS/device-type metadata</li>
+            <li>
+              a pseudonymous PostHog installation/distinct identifier
+            </li>
+          </ul>
+          <p>Current PostHog configuration includes:</p>
+          <ul>
+            <li>no identify() calls</li>
+            <li>no alias() calls</li>
+            <li>no group calls</li>
+            <li>personProfiles = never</li>
+            <li>session replay disabled</li>
+            <li>lifecycle autocapture disabled</li>
+            <li>surveys disabled</li>
+            <li>remote feature flags disabled</li>
+            <li>automatic error capture disabled</li>
+            <li>push capture disabled</li>
+            <li>GeoIP enrichment disabled</li>
+          </ul>
+          <p>
+            Network requests inherently may make an IP address transiently
+            available to infrastructure providers, but RoamXP configures its
+            analytics service not to retain client IP data for product
+            analytics.
+          </p>
+          <p>RoamXP does not send the following to PostHog:</p>
+          <ul>
+            <li>name</li>
+            <li>email</li>
+            <li>journal text</li>
+            <li>journal photos</li>
+            <li>journal audio</li>
+            <li>raw HealthKit step values</li>
+            <li>Screen Time selections/tokens</li>
+            <li>notification body text</li>
+            <li>StoreKit receipts/full transaction payloads</li>
+            <li>precise GPS location</li>
+          </ul>
+
+          <h2>8. Purchases and Subscriptions</h2>
+          <p>
+            Purchases and subscriptions are processed by Apple through
+            StoreKit / the App Store (including via expo-iap in the current
+            implementation). RoamXP does not receive or store payment card
+            information.
+          </p>
+          <p>
+            Limited subscription or product interaction metadata may be sent to
+            PostHog. Full StoreKit receipts and full transaction payloads are
+            not sent to PostHog.
+          </p>
+          <p>
+            Superwall is not integrated in the current implementation. No
+            advertising or attribution SDK was found for purchase attribution.
+          </p>
+
+          <h2>9. Notifications</h2>
+          <p>
+            In the current implementation, RoamXP may request notification
+            permission and may use local notifications or reminders.
+            Notification title and body content is not sent to PostHog.
+          </p>
+          <p>
+            No verified Apple Push Notification service (APNs) push-token
+            collection path currently exists. This describes current behavior
+            and is not a permanent guarantee that notification handling will
+            never change.
+          </p>
+
+          <h2>10. Location</h2>
+          <p>
+            RoamXP does not request native GPS or location permission. RoamXP
+            does not collect precise GPS location. PostHog GeoIP enrichment is
+            disabled.
+          </p>
+
+          <h2>11. Advertising and Tracking</h2>
+          <p>
+            No advertising SDK is currently integrated. RoamXP does not use
+            IDFA, and App Tracking Transparency (ATT) / IDFA APIs are not used
+            in the current implementation.
+          </p>
+          <p>
+            RoamXP does not use app data for cross-app advertising tracking.
+            RoamXP does not sell personal information for advertising.
+          </p>
+          <p>
+            These statements describe current implementation and are not broad
+            certifications about every possible future change.
+          </p>
+
+          <h2>12. Accounts</h2>
+          <p>
+            RoamXP currently does not create user accounts. No RoamXP
+            email/password or login system currently exists.
+          </p>
+
+          <h2>13. Data Retention and Deletion</h2>
+          <p><strong>Local data.</strong> Local data may be removable through
+            available local controls in the app or on your device. Uninstalling
+            the app removes installed local app data from the device, subject to
+            Apple and device backup behavior. Local app data may also be
+            included in device backups depending on your Apple and iCloud backup
+            settings.
+          </p>
+          <p>
+            <strong>PostHog analytics.</strong> Analytics data may be retained
+            according to configured analytics-provider retention. Because
+            analytics is pseudonymous and not tied to a RoamXP account, RoamXP
+            may not always be able to reliably associate analytics records with
+            a real-world person.
+          </p>
+          <p>
+            For privacy questions or requests, contact
+            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>.
+          </p>
+
+          <h2>14. Children</h2>
+          <p>
+            RoamXP is not intentionally designed to collect personal information
+            from children where such collection is prohibited by applicable law.
+          </p>
+
+          <h2>15. Website Privacy</h2>
+          <p>
+            Separately from the mobile app, the RoamXP website currently uses no
+            RoamXP analytics SDK, no advertising pixels, and no first-party
+            tracking cookies in the site code. The website does not contain a
+            contact form and uses mailto links for support or contact.
+          </p>
+          <p>
+            Hosting and network providers may process ordinary connection
+            metadata necessary to serve the website (for example, technical
+            request information needed to deliver pages).
+          </p>
+
+          <h2>16. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time to reflect
+            changes in the product, providers, or practices. When we do, we will
+            revise the effective date above. Continued use of RoamXP or this
+            website after an update means you should review the revised policy.
+          </p>
+
+          <h2>17. Contact</h2>
+          <p>
+            If you have questions about this Privacy Policy or RoamXP privacy
+            practices, contact:
+          </p>
+          <ul>
+            <li><strong>Operator:</strong> Oleg Pyshenkin</li>
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="./" aria-current="page">Privacy</a>
+          <a href="../terms/">Terms</a>
+          <a href="../support/">Support</a>
+          <a href="../privacy-choices/">Privacy Choices</a>
+        </nav>
+        <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

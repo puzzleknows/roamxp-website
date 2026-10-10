@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found — RoamXP</title>
+    <meta
+      name="description"
+      content="The page you requested could not be found on the RoamXP website."
+    />
+    <meta name="theme-color" content="#0b0d10" />
+    <!--
+      Default relative hrefs work when 404.html is opened at the site root.
+      The script below rewrites asset/nav URLs when GitHub Pages serves this
+      file for a nested missing path (e.g. /roamxp-website/missing/page).
+    -->
+    <link rel="stylesheet" href="styles.css" data-root-href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="./" data-root-href="">
+          Roam<span class="brand__mark">XP</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="./#features" data-root-href="#features">Features</a>
+          <a href="support/" data-root-href="support/">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="page error-page">
+      <div class="page__inner">
+        <p class="error-page__code">404</p>
+        <h1>Page not found</h1>
+        <p>
+          That address doesn’t match anything on the RoamXP site. Head home to
+          continue exploring.
+        </p>
+        <a class="button" href="./" data-root-href="">Back to home</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="privacy/" data-root-href="privacy/">Privacy</a>
+          <a href="terms/" data-root-href="terms/">Terms</a>
+          <a href="support/" data-root-href="support/">Support</a>
+          <a href="privacy-choices/" data-root-href="privacy-choices/"
+            >Privacy Choices</a
+          >
+        </nav>
+        <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var REPO = "roamxp-website";
+        var path = location.pathname || "/";
+        var base;
+
+        if (location.protocol === "file:") {
+          return;
+        }
+
+        var repoPrefix = "/" + REPO;
+        if (path === repoPrefix || path.indexOf(repoPrefix + "/") === 0) {
+          base = repoPrefix + "/";
+        } else {
+          base = "/";
+        }
+
+        document.querySelectorAll("[data-root-href]").forEach(function (el) {
+          var rel = el.getAttribute("data-root-href") || "";
+          var href = base + rel.replace(/^\//, "");
+          if (rel.charAt(0) === "#") {
+            href = base.replace(/\/?$/, "/") + rel;
+          }
+          if (el.tagName === "LINK") {
+            el.setAttribute("href", href);
+          } else {
+            el.setAttribute("href", href);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
