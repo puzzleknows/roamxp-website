@@ -162,7 +162,7 @@ body.home .site-header {
 
 .brand {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.12em;
   font-family: var(--font);
   font-size: 1.2rem;
@@ -175,19 +175,6 @@ body.home .site-header {
 
 .brand:hover {
   color: var(--text);
-}
-
-.brand--logo {
-  align-items: center;
-}
-
-.brand__logo {
-  display: block;
-  width: 2.35rem;
-  height: 2.35rem;
-  object-fit: contain;
-  border-radius: 0.45rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .brand__mark {
@@ -234,8 +221,8 @@ main {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(3.25rem, 7vw, 5rem);
-  min-height: min(90vh, 54rem);
+  padding: clamp(3.25rem, 7vw, 5rem) 0 clamp(3rem, 6vw, 4.5rem);
+  min-height: auto;
   display: flex;
   align-items: center;
 }
@@ -312,55 +299,55 @@ main {
   width: min(100% - 2rem, var(--max-wide));
   margin-inline: auto;
   display: grid;
-  gap: clamp(1.75rem, 4vw, 3rem);
+  gap: clamp(1.5rem, 3.5vw, 2.75rem);
   align-items: center;
 }
 
 .hero__visuals {
   order: 2;
   min-width: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .hero__stack {
   position: relative;
-  width: min(100%, 22rem);
-  margin-inline: auto;
-  aspect-ratio: 470 / 820;
-  max-height: min(68vh, 34rem);
+  width: min(100%, 19.5rem);
+  height: 22.5rem;
 }
 
 .hero__shot {
   position: absolute;
   display: block;
-  width: 72%;
   height: auto;
   max-width: none;
-  border-radius: 1.15rem;
+  border-radius: 1.35rem;
   object-fit: cover;
   object-position: top center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
-    0 18px 48px rgba(0, 0, 0, 0.45),
-    0 2px 0 rgba(255, 255, 255, 0.06) inset;
-  background: #120a18;
+    0 14px 36px rgba(0, 0, 0, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  background: #0c0a14;
 }
 
 .hero__shot--back {
-  top: 4%;
+  top: 0.35rem;
   left: 0;
-  width: 68%;
+  width: 9.6rem;
   z-index: 1;
-  transform: rotate(-5deg) translateY(4%);
-  opacity: 0.92;
-  filter: saturate(0.95) brightness(0.92);
+  transform: rotate(-7deg);
+  opacity: 0.88;
+  filter: brightness(0.9) saturate(0.96);
 }
 
 .hero__shot--front {
-  top: 8%;
+  top: 1.6rem;
   right: 0;
   left: auto;
-  width: 74%;
+  width: 11.75rem;
   z-index: 2;
-  transform: rotate(2.5deg);
+  transform: rotate(3.5deg);
 }
 
 .hero__inner {
@@ -437,36 +424,57 @@ main {
 }
 
 @media (min-width: 900px) {
+  .hero {
+    min-height: min(78vh, 42rem);
+  }
+
   .hero__stage {
-    grid-template-columns: minmax(18rem, 0.95fr) minmax(20rem, 1.05fr);
-    gap: clamp(2rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(17rem, 0.9fr) minmax(22rem, 1.1fr);
+    gap: clamp(1.75rem, 3.5vw, 3rem);
     align-items: center;
   }
 
   .hero__visuals {
     order: 0;
+    justify-content: flex-start;
   }
 
   .hero__inner {
     order: 0;
     margin-inline: 0;
-    max-width: none;
+    max-width: 34rem;
   }
 
   .hero__stack {
-    width: 100%;
-    max-height: min(72vh, 38rem);
-    margin-inline: 0;
+    width: 22.5rem;
+    height: 26rem;
   }
 
   .hero__shot--back {
-    left: 2%;
-    top: 2%;
+    width: 11rem;
+    top: 0.5rem;
+    left: 0.15rem;
   }
 
   .hero__shot--front {
-    right: 2%;
-    top: 10%;
+    width: 13.25rem;
+    top: 2rem;
+    right: 0.15rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hero__stack {
+    width: 24.5rem;
+    height: 28rem;
+  }
+
+  .hero__shot--back {
+    width: 12rem;
+  }
+
+  .hero__shot--front {
+    width: 14.5rem;
   }
 }
 
@@ -949,8 +957,8 @@ body.home .site-footer {
   .hero {
     min-height: auto;
     align-items: flex-start;
-    padding-top: clamp(2.75rem, 10vw, 3.75rem);
-    padding-bottom: clamp(2.75rem, 8vw, 3.5rem);
+    padding-top: clamp(2.5rem, 9vw, 3.5rem);
+    padding-bottom: clamp(2.5rem, 7vw, 3.25rem);
   }
 
   .hero h1 {
@@ -958,15 +966,18 @@ body.home .site-footer {
   }
 
   .hero__stack {
-    width: min(100%, 19rem);
-    max-height: 28rem;
+    width: min(100%, 13rem);
+    height: auto;
+    aspect-ratio: 13 / 22;
   }
 
   .hero__shot--back {
-    transform: rotate(-4deg) translateY(3%);
+    display: none;
   }
 
   .hero__shot--front {
-    transform: rotate(2deg);
+    inset: 0 auto auto 0;
+    width: 100%;
+    transform: none;
   }
 }
