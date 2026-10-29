@@ -18,6 +18,9 @@
       content="RoamXP helps you build your life like a character—daily quests, focus, journey tracking, and personal tools."
     />
     <meta property="og:url" content="https://roamxp.puzdev.com/" />
+    <meta property="og:image" content="https://roamxp.puzdev.com/assets/01.jpg" />
+    <link rel="icon" href="assets/logo_RX.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/logo_RX.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="home">
@@ -25,8 +28,15 @@
 
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="brand" href="./" aria-current="page">
-          Roam<span class="brand__mark">XP</span>
+        <a class="brand brand--logo" href="./" aria-current="page">
+          <img
+            class="brand__logo"
+            src="assets/logo_RX.png"
+            alt="RoamXP"
+            width="40"
+            height="40"
+            decoding="async"
+          />
         </a>
         <nav class="nav" aria-label="Primary">
           <a href="#features">Features</a>
@@ -41,18 +51,44 @@
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__horizon" aria-hidden="true"></div>
         <div class="hero__grain" aria-hidden="true"></div>
-        <div class="hero__inner">
-          <p class="hero__brand">
-            Roam<span class="brand__mark">XP</span>
-          </p>
-          <h1 id="hero-heading">Build your life like a character.</h1>
-          <p class="hero__lead">
-            Turn daily goals into quests, protect your focus, and watch
-            real-world progress shape your journey.
-          </p>
-          <div class="hero__actions">
-            <a class="button button--primary" href="#features">Explore features</a>
-            <a class="button button--ghost" href="support/">Get support</a>
+
+        <div class="hero__stage">
+          <div class="hero__visuals" aria-hidden="true">
+            <div class="hero__stack">
+              <img
+                class="hero__shot hero__shot--back"
+                src="assets/03.jpg"
+                alt=""
+                width="470"
+                height="1024"
+                decoding="async"
+              />
+              <img
+                class="hero__shot hero__shot--front"
+                src="assets/01.jpg"
+                alt=""
+                width="470"
+                height="1024"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <div class="hero__inner">
+            <p class="hero__brand">
+              Roam<span class="brand__mark">XP</span>
+            </p>
+            <h1 id="hero-heading">Build your life like a character.</h1>
+            <p class="hero__lead">
+              Turn daily goals into quests, protect your focus, and watch
+              real-world progress shape your journey.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#features"
+                >Explore features</a
+              >
+              <a class="button button--ghost" href="support/">Get support</a>
+            </div>
           </div>
         </div>
       </section>
