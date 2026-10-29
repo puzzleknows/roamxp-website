@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://puzzleknows.github.io/roamxp-website/sitemap.xml
+Sitemap: https://roamxp.puzdev.com/sitemap.xml

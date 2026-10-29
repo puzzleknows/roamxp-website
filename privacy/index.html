@@ -6,9 +6,18 @@
     <title>Privacy Policy — RoamXP</title>
     <meta
       name="description"
-      content="RoamXP Privacy Policy: how the local-first app and website handle information, analytics, HealthKit, purchases, and related practices."
+      content="RoamXP Privacy Policy: optional accounts, Cloud Save, analytics, HealthKit, Focus, subscriptions, marketing consent, and account deletion."
     />
     <meta name="theme-color" content="#0b0d10" />
+    <link rel="canonical" href="https://roamxp.puzdev.com/privacy/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RoamXP" />
+    <meta property="og:title" content="Privacy Policy — RoamXP" />
+    <meta
+      property="og:description"
+      content="RoamXP Privacy Policy: optional accounts, Cloud Save, analytics, HealthKit, Focus, subscriptions, marketing consent, and account deletion."
+    />
+    <meta property="og:url" content="https://roamxp.puzdev.com/privacy/" />
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
@@ -28,8 +37,8 @@
       <div class="page__inner">
         <h1>Privacy Policy</h1>
         <div class="policy-meta">
-          <p><strong>Effective date:</strong> October 9, 2026</p>
-          <p><strong>Operator:</strong> Oleg Pyshenkin</p>
+          <p><strong>Effective date:</strong> October 29, 2026</p>
+          <p><strong>Operator:</strong> Puzzle Tech Studios LLC</p>
         </div>
 
         <article class="policy">
@@ -37,27 +46,29 @@
           <p>
             This Privacy Policy explains how RoamXP (“RoamXP,” “we,” “us,” or
             “our”) handles information in connection with the RoamXP mobile
-            application and this website. It describes current product behavior
-            as implemented today. It is not a guarantee that every practice will
-            remain unchanged forever.
+            application (iOS and Android) and this website. It describes current
+            product behavior as implemented today and is not a guarantee that
+            every practice will remain unchanged forever.
           </p>
           <p>
-            RoamXP is designed as a local-first experience. There is currently
-            no RoamXP user account system and no RoamXP-operated backend or cloud
-            storage for your app content. Limited anonymous or pseudonymous
-            product analytics are collected through PostHog, as described below.
+            RoamXP is primarily a device-first self-improvement app. You can use
+            core features with data stored on your device. Optionally, you may
+            sign in with Apple or Google to create a RoamXP account powered by
+            Supabase Auth and enable Cloud Save backups of selected progress and
+            user content, as described below.
           </p>
 
-          <h2>2. Local-First Design</h2>
+          <h2>2. Device-First Design and Optional Cloud Save</h2>
           <p>
-            RoamXP is built so that your core content and activity stay on your
-            device. RoamXP does not currently operate a RoamXP account login
-            system, and no RoamXP backend or cloud storage for app content was
-            found in the current implementation.
+            Much of your RoamXP activity is stored locally on your device.
+            Local app data may also be included in device backups depending on
+            your Apple, Google, or device backup settings.
           </p>
           <p>
-            Local app data may also be included in device backups depending on
-            your Apple and iCloud backup settings.
+            If you choose to sign in, RoamXP can automatically back up an
+            allowlisted Cloud Save snapshot to Supabase-hosted storage tied to
+            your account. Cloud Save is optional. Signing out, uninstalling the
+            app, or never creating an account does not require Cloud Save.
           </p>
 
           <h2>3. Information Stored on Your Device</h2>
@@ -69,78 +80,114 @@
             <li>nutrition logs</li>
             <li>workout logs</li>
             <li>goals</li>
-            <li>progression / XP</li>
-            <li>campaign state</li>
-            <li>achievements</li>
+            <li>progression / XP, rewards, and related progression state</li>
+            <li>campaign / quest state</li>
+            <li>achievements and collectibles</li>
             <li>onboarding state</li>
             <li>step totals</li>
-            <li>Screen Time / Family Controls selections</li>
+            <li>Focus / Screen Time or distraction-protection selections (where available)</li>
             <li>preferences</li>
             <li>entitlement/cache state</li>
+            <li>Cloud Save backup status and restore journals (device-side)</li>
+          </ul>
+
+          <h2>4. Accounts and Authentication</h2>
+          <p>
+            RoamXP offers optional account sign-in with Apple and/or Google.
+            Authentication is handled through Supabase Auth. RoamXP does not
+            operate a separate email/password registration system.
+          </p>
+          <p>
+            When you sign in, we may process account identifiers such as your
+            Supabase user id, linked Apple or Google identity references, and
+            any email address provided by the sign-in provider (including Apple
+            Hide My Email / private relay addresses when Apple supplies one).
+          </p>
+          <p>
+            Account features may be limited by platform, build, or feature flags.
+            Where Accounts are unavailable, gameplay can still run with local
+            data only.
+          </p>
+
+          <h2>5. Cloud Save Contents</h2>
+          <p>
+            When Cloud Save is enabled for a signed-in account, RoamXP may
+            automatically upload a versioned snapshot that can include:
+          </p>
+          <ul>
+            <li>player profile and progression / XP</li>
+            <li>goals, rewards, cosmetics, and related progression unlocks</li>
+            <li>quest, campaign, challenge, and journey-related progress</li>
+            <li>journal text entries (text and metadata only)</li>
+            <li>workout history and related workout preferences</li>
+            <li>nutrition logs and nutrition goals</li>
+            <li>selected tools / wisdom saves and profile appearance settings</li>
+            <li>selected preferences needed to restore progress</li>
           </ul>
           <p>
-            This information is used to provide RoamXP features on your device.
-            Local app data may also be included in device backups depending on
-            your Apple and iCloud backup settings.
+            Cloud Save is intended to protect progress across devices linked to
+            the same signed-in account. Conflict handling may require you to
+            choose between local and cloud progress when both contain data.
           </p>
 
-          <h2>4. Journal and User Content</h2>
+          <h2>6. Journal and User Content</h2>
           <p>
-            Journal text is stored locally on your device. Journal photos and
-            journal audio are also stored locally. RoamXP does not upload this
-            content to a RoamXP server. This content is not sent to PostHog.
+            Journal text may be stored on your device and, when Cloud Save is
+            enabled, included in Cloud Save as text-only entries.
+          </p>
+          <p>
+            Journal photos and journal audio remain device-local. They are not
+            included in Cloud Save and are not intentionally uploaded to RoamXP
+            cloud storage. RoamXP does not claim end-to-end encryption of journal
+            or other user content.
+          </p>
+          <p>
+            Journal text, photos, and audio are not sent to PostHog.
           </p>
 
-          <h2>5. Apple HealthKit</h2>
+          <h2>7. Focus / Screen Time and Device-Only Controls</h2>
           <p>
-            RoamXP may request Apple HealthKit permission to read step count
-            only. In the current implementation, RoamXP does not write data to
-            HealthKit.
+            On supported Apple devices, Focus and distraction-protection features
+            may use Apple APIs such as FamilyControls, ManagedSettings, and
+            DeviceActivity. Related selections and opaque tokens are stored
+            locally and, where required by Apple, in Apple App Group storage.
           </p>
           <p>
-            Step values are used locally for walking, Journey, and progression
-            features. Raw HealthKit values are not sent to PostHog. HealthKit
-            data is not used for advertising and is not sold.
-          </p>
-          <p>
-            RoamXP is not a medical device and does not provide medical advice,
-            diagnosis, or treatment.
-          </p>
-
-          <h2>6. Screen Time and Focus Features</h2>
-          <p>
-            For Focus and distraction-protection features, RoamXP uses Apple
-            APIs such as FamilyControls, ManagedSettings, and DeviceActivity.
-          </p>
-          <p>
-            Related selections and tokens are stored locally and, where
-            required by Apple, in Apple App Group storage. Selected app or
-            category identities and opaque tokens are not sent to PostHog. This
-            information is not used for advertising.
+            Focus / Screen Time selections and tokens are device-only. They are
+            not included in Cloud Save and are not intentionally sent to
+            PostHog or Superwall. Availability and behavior depend on platform
+            permissions and system settings. RoamXP does not guarantee
+            uninterrupted blocking of all apps.
           </p>
 
-          <h2>7. Product Analytics</h2>
+          <h2>8. Apple HealthKit and Health-Related Data</h2>
+          <p>
+            On iOS, RoamXP may request Apple HealthKit permission to read step
+            count only. In the current implementation, RoamXP does not write
+            data to HealthKit. Step values are used locally for walking,
+            Journey, and progression features.
+          </p>
+          <p>
+            Raw HealthKit values are not sent to PostHog, are not used for
+            advertising, and are not sold. RoamXP is not a medical device and
+            does not provide medical advice, diagnosis, or treatment.
+          </p>
+
+          <h2>9. Product Analytics</h2>
           <p>
             RoamXP currently uses PostHog for limited anonymous or
-            pseudonymous product analytics. This helps understand onboarding,
-            feature use, and subscription-related interactions so the product
-            can be improved.
+            pseudonymous product analytics to understand onboarding, feature
+            use, and subscription-related interactions.
           </p>
           <p>Analytics may include:</p>
           <ul>
-            <li>onboarding progress</li>
-            <li>onboarding screen/step metadata</li>
+            <li>onboarding progress and screen/step metadata</li>
             <li>explicitly instrumented feature interactions</li>
             <li>coarse paywall/subscription interactions</li>
             <li>purchase/restore status</li>
             <li>permission outcomes</li>
-            <li>app version</li>
-            <li>build number</li>
-            <li>platform</li>
-            <li>OS/device-type metadata</li>
-            <li>
-              a pseudonymous PostHog installation/distinct identifier
-            </li>
+            <li>app version, build number, platform, and OS/device-type metadata</li>
+            <li>a pseudonymous PostHog installation/distinct identifier</li>
           </ul>
           <p>Current PostHog configuration includes:</p>
           <ul>
@@ -166,36 +213,34 @@
           <ul>
             <li>name</li>
             <li>email</li>
-            <li>journal text</li>
-            <li>journal photos</li>
-            <li>journal audio</li>
+            <li>journal text, photos, or audio</li>
             <li>raw HealthKit step values</li>
-            <li>Screen Time selections/tokens</li>
+            <li>Screen Time / Focus selections or tokens</li>
             <li>notification body text</li>
-            <li>StoreKit receipts/full transaction payloads</li>
+            <li>StoreKit / Play receipts or full transaction payloads</li>
             <li>precise GPS location</li>
+            <li>Cloud Save snapshot contents as a bulk export to analytics</li>
           </ul>
 
-          <h2>8. Purchases and Subscriptions</h2>
+          <h2>10. Purchases and Subscriptions</h2>
           <p>
-            Purchases and subscriptions are processed by Apple through
-            StoreKit / the App Store (including via expo-iap in the current
-            implementation). RoamXP does not receive or store payment card
-            information.
+            Purchases and subscriptions are processed by Apple through StoreKit
+            / the App Store and by Google through Google Play Billing (via
+            expo-iap in the current implementation). RoamXP does not receive or
+            store payment card information.
           </p>
           <p>
             Limited subscription or product interaction metadata may be sent to
-            PostHog. Full StoreKit receipts and full transaction payloads are
-            not sent to PostHog.
+            PostHog. Full store receipts and full transaction payloads are not
+            sent to PostHog.
           </p>
           <p>
             RoamXP integrates Superwall (via expo-superwall / SuperwallKit) as
             subscription-related infrastructure, including Custom Purchase
             Controller support and premium entitlement synchronization.
-            Purchases and payment processing remain through Apple’s StoreKit /
-            the App Store (including via expo-iap). RoamXP’s existing native
-            paywalls remain in use; remote Superwall paywalls or placements are
-            not currently presented.
+            Purchases remain processed by Apple or Google. RoamXP’s existing
+            native paywalls remain in use; remote Superwall paywalls or
+            placements are not currently presented.
           </p>
           <p>
             When Superwall is enabled, subscription status and other relevant
@@ -207,109 +252,165 @@
             advertising tracking.
           </p>
           <p>
-            Journal content, HealthKit records, and Screen Time / Family
-            Controls selections or tokens are not intentionally sent to
-            Superwall.
+            Journal content, HealthKit records, and Screen Time / Focus
+            selections or tokens are not intentionally sent to Superwall.
+            Subscription entitlement truth remains with Apple or Google store
+            systems, not Cloud Save.
           </p>
 
-          <h2>9. Notifications</h2>
+          <h2>11. Marketing Preferences</h2>
           <p>
-            In the current implementation, RoamXP may request notification
-            permission and may use local notifications or reminders.
-            Notification title and body content is not sent to PostHog.
+            If Accounts features are available and you are signed in, RoamXP may
+            offer an optional marketing email preference (for example, news and
+            offers). Marketing consent defaults to OFF. Cloud Save and account
+            recovery do not require marketing opt-in.
           </p>
           <p>
-            No verified Apple Push Notification service (APNs) push-token
-            collection path currently exists. This describes current behavior
-            and is not a permanent guarantee that notification handling will
-            never change.
-          </p>
-
-          <h2>10. Location</h2>
-          <p>
-            RoamXP does not request native GPS or location permission. RoamXP
-            does not collect precise GPS location. PostHog GeoIP enrichment is
-            disabled.
+            When you change this preference, RoamXP may store your choice,
+            timestamps, and related consent evidence on the account backend.
+            You can turn marketing email off again in Settings when the control
+            is available. Transactional messages related to security or account
+            deletion verification are separate from marketing.
           </p>
 
-          <h2>11. Advertising and Tracking</h2>
+          <h2>12. Notifications</h2>
+          <p>
+            RoamXP may request notification permission and may use local
+            notifications or reminders. Notification title and body content is
+            not sent to PostHog. Platform settings may suppress or delay
+            notifications. This describes current behavior and is not a
+            permanent guarantee that notification handling will never change.
+          </p>
+
+          <h2>13. Location</h2>
+          <p>
+            RoamXP does not request native GPS or precise location permission
+            for tracking. RoamXP does not collect precise GPS location. PostHog
+            GeoIP enrichment is disabled.
+          </p>
+
+          <h2>14. Advertising and Tracking</h2>
           <p>
             No advertising SDK is currently integrated. RoamXP does not use
             IDFA, and App Tracking Transparency (ATT) / IDFA APIs are not used
-            in the current implementation.
+            in the current implementation for advertising tracking.
           </p>
           <p>
-            RoamXP does not use app data for cross-app advertising tracking.
-            RoamXP does not sell personal information for advertising.
-          </p>
-          <p>
-            These statements describe current implementation and are not broad
-            certifications about every possible future change.
+            RoamXP does not use app data for cross-app advertising tracking and
+            does not sell personal information for advertising. These statements
+            describe current implementation.
           </p>
 
-          <h2>12. Accounts</h2>
+          <h2>15. Account Deletion and Data Retention</h2>
           <p>
-            RoamXP currently does not create user accounts. No RoamXP
-            email/password or login system currently exists.
+            <strong>In-app deletion.</strong> When Accounts features are
+            available, you may delete your RoamXP account from Profile →
+            Settings → Account &amp; Cloud Save → Delete account. In-app
+            deletion uses additional verification (such as email one-time codes
+            or provider reauthentication) before cloud account data is purged.
+          </p>
+          <p>
+            <strong>Web request.</strong> You may also request deletion without
+            reinstalling the app via our
+            <a href="../account-deletion/">Account Deletion</a>
+            page. A web email request is a request for deletion, not an
+            automatic instant wipe. We verify identity before completing
+            deletion.
+          </p>
+          <p>
+            When account deletion is completed, we delete the RoamXP
+            authentication account and associated Cloud Save data for that
+            account (including revision history where stored), marketing
+            preferences and consent records for that account, and related
+            account-bound cloud records. We may retain a hashed email
+            suppression entry so we do not contact you for marketing after
+            deletion, and we may retain limited records where required for
+            security, fraud prevention, legal compliance, or dispute handling
+            (for example, a legal hold).
+          </p>
+          <p>
+            Deleting a RoamXP account does not cancel App Store or Google Play
+            subscriptions. Manage billing in your store account settings.
+            Device-local data (including journal photos/audio and Focus tokens)
+            is not automatically erased from every device solely because a cloud
+            account was deleted.
+          </p>
+          <p>
+            <strong>Local data.</strong> Local data may be removable through
+            available local controls. Uninstalling the app removes installed
+            local app data from that device, subject to platform backup
+            behavior.
+          </p>
+          <p>
+            <strong>Analytics.</strong> PostHog analytics may be retained
+            according to configured provider retention. Because analytics is
+            pseudonymous and not designed around RoamXP account emails,
+            analytics records may not always be reliably associated with a
+            particular person after account deletion.
           </p>
 
-          <h2>13. Data Retention and Deletion</h2>
-          <p><strong>Local data.</strong> Local data may be removable through
-            available local controls in the app or on your device. Uninstalling
-            the app removes installed local app data from the device, subject to
-            Apple and device backup behavior. Local app data may also be
-            included in device backups depending on your Apple and iCloud backup
-            settings.
-          </p>
-          <p>
-            <strong>PostHog analytics.</strong> Analytics data may be retained
-            according to configured analytics-provider retention. Because
-            analytics is pseudonymous and not tied to a RoamXP account, RoamXP
-            may not always be able to reliably associate analytics records with
-            a real-world person.
-          </p>
-          <p>
-            For privacy questions or requests, contact
-            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>.
-          </p>
-
-          <h2>14. Children</h2>
+          <h2>16. Children</h2>
           <p>
             RoamXP is not intentionally designed to collect personal information
             from children where such collection is prohibited by applicable law.
           </p>
 
-          <h2>15. Website Privacy</h2>
+          <h2>17. Website Privacy</h2>
           <p>
             Separately from the mobile app, the RoamXP website currently uses no
             RoamXP analytics SDK, no advertising pixels, and no first-party
             tracking cookies in the site code. The website does not contain a
-            contact form and uses mailto links for support or contact.
+            contact form that collects passwords or one-time codes. Support and
+            account-deletion requests use mailto links.
           </p>
           <p>
             Hosting and network providers may process ordinary connection
-            metadata necessary to serve the website (for example, technical
-            request information needed to deliver pages).
+            metadata necessary to serve the website.
           </p>
 
-          <h2>16. Changes to This Policy</h2>
+          <h2>18. Third-Party Services</h2>
           <p>
-            We may update this Privacy Policy from time to time to reflect
-            changes in the product, providers, or practices. When we do, we will
-            revise the effective date above. Continued use of RoamXP or this
-            website after an update means you should review the revised policy.
-          </p>
-
-          <h2>17. Contact</h2>
-          <p>
-            If you have questions about this Privacy Policy or RoamXP privacy
-            practices, contact:
+            Depending on features you use, RoamXP may interact with:
           </p>
           <ul>
-            <li><strong>Operator:</strong> Oleg Pyshenkin</li>
+            <li>Supabase (authentication and Cloud Save hosting)</li>
+            <li>Apple (Sign in with Apple, App Store / StoreKit, HealthKit, Screen Time APIs where used)</li>
+            <li>Google (Sign in with Google, Google Play Billing where used)</li>
+            <li>PostHog (product analytics)</li>
+            <li>Superwall (subscription infrastructure / entitlement sync)</li>
+          </ul>
+          <p>
+            Those providers process information under their own terms and
+            privacy practices in addition to this Policy, to the extent
+            applicable.
+          </p>
+
+          <h2>19. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. When we do, we
+            will revise the effective date above. If you continue to use RoamXP
+            or this website after an update, you should review the revised
+            policy.
+          </p>
+
+          <h2>20. Contact</h2>
+          <p>
+            For privacy questions, privacy requests, or account-deletion help,
+            contact:
+          </p>
+          <ul>
+            <li><strong>Operator:</strong> Puzzle Tech Studios LLC</li>
             <li>
               <strong>Email:</strong>
               <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>
+            </li>
+            <li>
+              <strong>Account deletion page:</strong>
+              <a href="../account-deletion/">Account Deletion</a>
+            </li>
+            <li>
+              <strong>Privacy choices:</strong>
+              <a href="../privacy-choices/">Privacy Choices</a>
             </li>
           </ul>
         </article>
@@ -323,6 +424,7 @@
           <a href="../terms/">Terms</a>
           <a href="../support/">Support</a>
           <a href="../privacy-choices/">Privacy Choices</a>
+          <a href="../account-deletion/">Delete Account</a>
         </nav>
         <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
       </div>

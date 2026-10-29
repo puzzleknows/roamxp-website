@@ -8,10 +8,19 @@
       name="description"
       content="RoamXP helps you build your life like a character—daily quests, focus, journey tracking, and personal tools."
     />
-    <meta name="theme-color" content="#0b0d10" />
+    <meta name="theme-color" content="#07060f" />
+    <link rel="canonical" href="https://roamxp.puzdev.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RoamXP" />
+    <meta property="og:title" content="RoamXP — Build your life like a character" />
+    <meta
+      property="og:description"
+      content="RoamXP helps you build your life like a character—daily quests, focus, journey tracking, and personal tools."
+    />
+    <meta property="og:url" content="https://roamxp.puzdev.com/" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -28,15 +37,23 @@
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero__sky" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__horizon" aria-hidden="true"></div>
+        <div class="hero__grain" aria-hidden="true"></div>
         <div class="hero__inner">
-          <p class="hero__brand" aria-hidden="true">
+          <p class="hero__brand">
             Roam<span class="brand__mark">XP</span>
           </p>
           <h1 id="hero-heading">Build your life like a character.</h1>
           <p class="hero__lead">
-            A calm space to shape daily habits, stay focused, and see your
-            progress as a journey—not a grind. RoamXP is coming into view.
+            Turn daily goals into quests, protect your focus, and watch
+            real-world progress shape your journey.
           </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#features">Explore features</a>
+            <a class="button button--ghost" href="support/">Get support</a>
+          </div>
         </div>
       </section>
 
@@ -47,44 +64,51 @@
       >
         <div class="section__inner">
           <header class="section__header">
-            <p class="section__eyebrow">Inside RoamXP</p>
-            <h2 id="features-heading">Tools for intentional progress</h2>
+            <p class="section__eyebrow">Your system</p>
+            <h2 id="features-heading">
+              Everything you need to turn real progress into momentum.
+            </h2>
             <p class="section__intro">
-              Placeholder overview of the core areas—details will expand as the
-              product takes shape.
+              Five core spaces designed to keep daily effort clear, protected,
+              and worth looking back on.
             </p>
           </header>
 
           <ul class="feature-list">
-            <li class="feature">
+            <li class="feature feature--gold">
+              <span class="feature__label" aria-hidden="true">01</span>
               <h3>Daily Quest</h3>
               <p>
                 One clear mission for the day so momentum stays simple and
                 intentional.
               </p>
             </li>
-            <li class="feature">
+            <li class="feature feature--pink">
+              <span class="feature__label" aria-hidden="true">02</span>
               <h3>Focus</h3>
               <p>
                 Quiet structure for deep work—fewer distractions, clearer
                 attention.
               </p>
             </li>
-            <li class="feature">
+            <li class="feature feature--cyan">
+              <span class="feature__label" aria-hidden="true">03</span>
               <h3>Journey</h3>
               <p>
                 See where you’ve been and where you’re headed across weeks and
                 seasons.
               </p>
             </li>
-            <li class="feature">
+            <li class="feature feature--violet">
+              <span class="feature__label" aria-hidden="true">04</span>
               <h3>Player Progress</h3>
               <p>
                 Track growth over time with a character-inspired view of your
                 effort.
               </p>
             </li>
-            <li class="feature">
+            <li class="feature feature--gold">
+              <span class="feature__label" aria-hidden="true">05</span>
               <h3>Personal Tools</h3>
               <p>
                 Lightweight utilities that support your routines without adding
@@ -103,6 +127,7 @@
           <a href="terms/">Terms</a>
           <a href="support/">Support</a>
           <a href="privacy-choices/">Privacy Choices</a>
+          <a href="account-deletion/">Delete Account</a>
         </nav>
         <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
       </div>

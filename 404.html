@@ -10,10 +10,12 @@
     />
     <meta name="theme-color" content="#0b0d10" />
     <!--
-      Default relative hrefs work when 404.html is opened at the site root.
+      Default relative hrefs work at the site root (custom domain or Pages root).
       The script below rewrites asset/nav URLs when GitHub Pages serves this
-      file for a nested missing path (e.g. /roamxp-website/missing/page).
+      file for a nested missing path (project Pages under /roamxp-website/
+      or a deep custom-domain 404 URL).
     -->
+    <link rel="canonical" href="https://roamxp.puzdev.com/" />
     <link rel="stylesheet" href="styles.css" data-root-href="styles.css" />
   </head>
   <body>
@@ -52,6 +54,9 @@
           <a href="privacy-choices/" data-root-href="privacy-choices/"
             >Privacy Choices</a
           >
+          <a href="account-deletion/" data-root-href="account-deletion/"
+            >Delete Account</a
+          >
         </nav>
         <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
       </div>
@@ -60,18 +65,28 @@
     <script>
       (function () {
         var REPO = "roamxp-website";
+        var CUSTOM_HOSTS = {
+          "roamxp.puzdev.com": true,
+          "www.roamxp.puzdev.com": true,
+        };
         var path = location.pathname || "/";
+        var host = (location.hostname || "").toLowerCase();
         var base;
 
         if (location.protocol === "file:") {
           return;
         }
 
-        var repoPrefix = "/" + REPO;
-        if (path === repoPrefix || path.indexOf(repoPrefix + "/") === 0) {
-          base = repoPrefix + "/";
-        } else {
+        // Custom domain (and apex-style hosts) always use site root.
+        if (CUSTOM_HOSTS[host]) {
           base = "/";
+        } else {
+          var repoPrefix = "/" + REPO;
+          if (path === repoPrefix || path.indexOf(repoPrefix + "/") === 0) {
+            base = repoPrefix + "/";
+          } else {
+            base = "/";
+          }
         }
 
         document.querySelectorAll("[data-root-href]").forEach(function (el) {
@@ -80,11 +95,7 @@
           if (rel.charAt(0) === "#") {
             href = base.replace(/\/?$/, "/") + rel;
           }
-          if (el.tagName === "LINK") {
-            el.setAttribute("href", href);
-          } else {
-            el.setAttribute("href", href);
-          }
+          el.setAttribute("href", href);
         });
       })();
     </script>

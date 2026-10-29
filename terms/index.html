@@ -6,9 +6,18 @@
     <title>Terms of Use — RoamXP</title>
     <meta
       name="description"
-      content="RoamXP Terms of Use: license, subscriptions, Focus and activity features, disclaimers, and related terms for the iOS app and website."
+      content="RoamXP Terms of Use: license, subscriptions, optional accounts and Cloud Save, Focus and activity features, disclaimers, and related terms for the iOS and Android app and website."
     />
     <meta name="theme-color" content="#0b0d10" />
+    <link rel="canonical" href="https://roamxp.puzdev.com/terms/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RoamXP" />
+    <meta property="og:title" content="Terms of Use — RoamXP" />
+    <meta
+      property="og:description"
+      content="RoamXP Terms of Use: license, subscriptions, optional accounts and Cloud Save, Focus and activity features, disclaimers, and related terms."
+    />
+    <meta property="og:url" content="https://roamxp.puzdev.com/terms/" />
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
@@ -28,16 +37,17 @@
       <div class="page__inner">
         <h1>Terms of Use</h1>
         <div class="policy-meta">
-          <p><strong>Effective date:</strong> October 9, 2026</p>
-          <p><strong>Operator:</strong> Oleg Pyshenkin</p>
+          <p><strong>Effective date:</strong> October 29, 2026</p>
+          <p><strong>Operator:</strong> Puzzle Tech Studios LLC</p>
         </div>
 
         <article class="policy">
           <h2>1. Introduction and Acceptance</h2>
           <p>
             These Terms of Use (“Terms”) govern your access to and use of the
-            RoamXP iOS application and this website (together, “RoamXP” or the
-            “Service”), operated by Oleg Pyshenkin (“we,” “us,” or “our”).
+            RoamXP mobile application (iOS and Android) and this website
+            (together, “RoamXP” or the “Service”), operated by Puzzle Tech
+            Studios LLC (“we,” “us,” or “our”).
           </p>
           <p>
             By downloading, accessing, or using RoamXP, you agree to these
@@ -56,24 +66,28 @@
             that apply to your use of the App Store and your device.
           </p>
           <p>
-            RoamXP is an iOS self-improvement application. Features may include
-            game-inspired progression, Daily Quest, Focus and distraction
-            protection, walking and Journey progression, journaling, workout
-            and nutrition tools, and related personal-progress features.
-            Available features may depend on your device, iOS version,
+            RoamXP is a self-improvement application for iOS and Android.
+            Features may include game-inspired progression, Daily Quest, Focus
+            and distraction protection, walking and Journey progression,
+            journaling, workout and nutrition tools, optional account Cloud
+            Save, and related personal-progress features.
+            Available features may depend on your device, platform version,
             permissions, and subscription status.
           </p>
           <p>
-            RoamXP currently has no user-account or login system. Most user
-            content and state are stored locally on your device.
+            Most user content and state are stored locally on your device.
+            Optionally, you may sign in with Apple or Google to create a RoamXP
+            account and enable Cloud Save backups of selected progress and user
+            content. Journal photos and journal audio remain device-local and
+            are not included in Cloud Save.
           </p>
 
           <h2>3. License to Use the App</h2>
           <p>
             Subject to these Terms, we grant you a limited, personal,
             nonexclusive, nontransferable, revocable license to download and
-            use RoamXP on Apple devices you own or control, as permitted by the
-            App Store rules and these Terms.
+            use RoamXP on devices you own or control, as permitted by the App
+            Store or Google Play rules and these Terms.
           </p>
           <p>
             This is a license to use the software, not a sale of the software
@@ -94,9 +108,9 @@
           <ul>
             <li>use RoamXP lawfully and in accordance with these Terms;</li>
             <li>
-              keep your device and Apple account secure, including any
-              credentials or settings that control access to purchases or
-              subscriptions;
+              keep your device and Apple or Google account secure, including any
+              credentials or settings that control access to purchases,
+              subscriptions, or optional RoamXP sign-in;
             </li>
             <li>
               grant only the permissions you intend RoamXP to use, and review
@@ -140,15 +154,18 @@
           <h2>8. Journal and User Content</h2>
           <p>
             You remain responsible for the journal entries, photos, audio, and
-            other content you create or store in RoamXP. Current journal and
-            media functionality is local-first. We do not claim ownership of
-            your private journal entries, photos, or audio.
+            other content you create or store in RoamXP. Journal photos and
+            audio remain device-local and are not included in Cloud Save.
+            Journal text may be included in Cloud Save when you are signed in.
+            We do not claim ownership of your private journal entries, photos,
+            or audio.
           </p>
           <p>
             If content matters to you, maintain appropriate backups. Deletion,
-            uninstall, device reset, or backup behavior may affect whether
-            content remains available. Local app data may also be included in
-            device backups depending on your Apple and iCloud backup settings.
+            uninstall, device reset, account deletion, or backup behavior may
+            affect whether content remains available. Local app data may also be
+            included in device backups depending on your platform backup
+            settings.
           </p>
 
           <h2>9. Subscriptions and Purchases</h2>
@@ -161,73 +178,84 @@
             <li><code>com.roamxp.app.premium.monthly</code></li>
           </ul>
           <p>
-            Pricing shown in the app comes from the App Store / StoreKit.
-            Payment processing is handled by Apple. RoamXP does not receive or
-            store your payment card details. Price and offer availability may
-            change.
+            Pricing shown in the app comes from the App Store / StoreKit or
+            Google Play Billing. Payment processing is handled by Apple or
+            Google. RoamXP does not receive or store your payment card details.
+            Price and offer availability may change.
           </p>
           <p>
-            Purchases and subscriptions are processed through Apple StoreKit
-            (including via expo-iap in the current implementation). RoamXP also
-            integrates Superwall as subscription-related infrastructure
-            (including a Custom Purchase Controller and premium entitlement
-            synchronization). Existing native paywalls remain in use; remote
-            Superwall paywalls are not currently presented. Superwall is not
-            used for advertising tracking. Refund handling is subject to
-            Apple’s processes and applicable law.
+            Purchases and subscriptions are processed through Apple StoreKit or
+            Google Play Billing (including via expo-iap in the current
+            implementation). RoamXP also integrates Superwall as
+            subscription-related infrastructure (including a Custom Purchase
+            Controller and premium entitlement synchronization). Existing native
+            paywalls remain in use; remote Superwall paywalls are not currently
+            presented. Superwall is not used for advertising tracking. Refund
+            handling is subject to Apple’s or Google’s processes and applicable
+            law.
           </p>
 
           <h2>10. Free Trials and Promotional Offers</h2>
           <p>
-            The yearly plan may offer an introductory free trial when Apple
-            reports that you are eligible and the offer is configured in App
-            Store Connect. Not every user receives a trial.
+            A plan may offer an introductory free trial when the store reports
+            that you are eligible and the offer is configured (for example in
+            App Store Connect or Google Play Console). Not every user receives a
+            trial.
           </p>
           <p>
-            Trial duration, eligibility, renewal price, and billing period
-            shown at purchase time are controlled by current StoreKit / App
-            Store information. Review that information carefully before you
-            subscribe.
+            Trial duration, eligibility, renewal price, and billing period shown
+            at purchase time are controlled by current App Store / StoreKit or
+            Google Play information. Review that information carefully before
+            you subscribe.
           </p>
 
           <h2>11. Auto-Renewal and Cancellation</h2>
           <p>
             Subscriptions automatically renew unless canceled according to
-            Apple subscription rules. You manage and cancel subscriptions
-            through your Apple account / App Store subscription settings.
+            Apple or Google subscription rules. You manage and cancel
+            subscriptions through your Apple or Google account subscription
+            settings.
           </p>
           <p>
-            Canceling stops future renewals according to Apple’s timing rules;
-            it does not necessarily provide a refund for the current period
-            unless Apple or applicable law provides otherwise.
+            Canceling stops future renewals according to the store’s timing
+            rules; it does not necessarily provide a refund for the current
+            period unless Apple, Google, or applicable law provides otherwise.
           </p>
 
           <h2>12. Restore Purchases</h2>
           <p>
-            Restore Purchases is available for eligible App Store purchases so
-            you can restore access on a device signed in with the Apple ID used
-            for the original purchase, subject to Apple’s systems and rules.
+            Restore Purchases is available for eligible store purchases so you
+            can restore access on a device signed in with the same Apple ID or
+            Google account used for the original purchase, subject to that
+            store’s systems and rules.
           </p>
 
-          <h2>13. Apple App Store Terms</h2>
+          <h2>13. App Store and Google Play Terms</h2>
           <p>
-            Because RoamXP is distributed through the Apple App Store, Apple’s
-            Media Services / App Store terms and Apple’s standard End User
-            License Agreement (or the Licensed Application End User License
-            Agreement) may also apply where relevant.
+            Because RoamXP may be distributed through the Apple App Store and
+            Google Play, Apple’s Media Services / App Store terms and standard
+            EULA, and Google Play’s terms of service, may also apply where
+            relevant.
           </p>
           <p>
-            Purchases and subscriptions are processed through Apple. Except as
-            required by applicable Apple terms, Apple is not responsible for
-            providing maintenance or support for RoamXP. If RoamXP fails to
-            conform to any applicable warranty that cannot be disclaimed, Apple
-            may have limited refund or other obligations under Apple’s terms;
-            beyond what those terms require, Apple has no other warranty
-            obligation with respect to RoamXP.
+            Purchases and subscriptions are processed through Apple or Google.
+            Except as required by applicable Apple or Google terms, those
+            platforms are not responsible for providing maintenance or support
+            for RoamXP beyond what their own terms require. If RoamXP fails to
+            conform to any applicable warranty that cannot be disclaimed, the
+            relevant store may have limited refund or other obligations under
+            its terms.
           </p>
           <p>
-            Nothing in this section invents obligations for Apple beyond what
-            Apple’s own terms and applicable law require.
+            Nothing in this section invents obligations for Apple or Google
+            beyond what their own terms and applicable law require.
+          </p>
+          <p>
+            RoamXP is operated by Puzzle Tech Studios LLC. The seller or
+            developer name shown in the Apple App Store or Google Play may
+            temporarily reflect the store-account identity used for distribution
+            (including during an Apple Developer membership migration) and does
+            not change these Terms or the operator identified above.
           </p>
 
           <h2>14. Availability and Changes to the Service</h2>
@@ -366,7 +394,7 @@
             For questions about these Terms or RoamXP, contact:
           </p>
           <ul>
-            <li><strong>Operator:</strong> Oleg Pyshenkin</li>
+            <li><strong>Operator:</strong> Puzzle Tech Studios LLC</li>
             <li>
               <strong>Email:</strong>
               <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>
@@ -383,6 +411,7 @@
           <a href="./" aria-current="page">Terms</a>
           <a href="../support/">Support</a>
           <a href="../privacy-choices/">Privacy Choices</a>
+          <a href="../account-deletion/">Delete Account</a>
         </nav>
         <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
       </div>

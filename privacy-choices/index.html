@@ -6,9 +6,18 @@
     <title>Privacy Choices — RoamXP</title>
     <meta
       name="description"
-      content="RoamXP privacy choices: local data controls, Apple permissions, product analytics, advertising practices, and how to contact us."
+      content="RoamXP privacy choices: local data, optional accounts and Cloud Save, Apple permissions, analytics, marketing consent, and how to contact us."
     />
     <meta name="theme-color" content="#0b0d10" />
+    <link rel="canonical" href="https://roamxp.puzdev.com/privacy-choices/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RoamXP" />
+    <meta property="og:title" content="Privacy Choices — RoamXP" />
+    <meta
+      property="og:description"
+      content="RoamXP privacy choices: local data, optional accounts and Cloud Save, permissions, analytics, marketing consent, and contact."
+    />
+    <meta property="og:url" content="https://roamxp.puzdev.com/privacy-choices/" />
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
@@ -28,121 +37,121 @@
       <div class="page__inner">
         <h1>Privacy Choices</h1>
         <p class="page__lead">
-          A clear look at the privacy controls available with RoamXP today—local
-          data, Apple permissions, analytics, and how to reach us.
+          A clear look at the privacy controls available with RoamXP
+          today—device data, optional accounts and Cloud Save, permissions,
+          analytics, marketing, and how to reach us.
         </p>
 
         <article class="policy">
           <h2>1. Your Privacy Choices</h2>
           <p>
-            RoamXP currently has no user account or login system and no RoamXP
-            cloud sync. Most personal and user-created content stays on your
-            device. Your main controls are local app settings, Apple system
-            permissions, and contacting us with privacy questions.
+            RoamXP is device-first. Optional Apple or Google sign-in enables a
+            RoamXP account (Supabase Auth) and Cloud Save for selected progress
+            and user content. Your main controls are local app settings, Apple
+            or Google system permissions, marketing preferences when signed in,
+            and contacting us with privacy or deletion requests.
           </p>
           <p>
             For full details, see our
             <a href="../privacy/">Privacy Policy</a>. Related pages:
-            <a href="../terms/">Terms of Use</a> and
-            <a href="../support/">Support</a>.
+            <a href="../terms/">Terms of Use</a>,
+            <a href="../support/">Support</a>, and
+            <a href="../account-deletion/">Delete Account</a>.
           </p>
 
           <h2>2. Local Data</h2>
           <p>
-            Most personal and user-created data—including journal text, photos,
-            and audio—is stored locally on your device. This content is
-            local-first and is not uploaded to a RoamXP backend. RoamXP has no
-            cloud account or cloud data dashboard.
+            Much personal and user-created data stays on your device—including
+            journal photos and journal audio, which are device-local and not
+            included in Cloud Save. Focus / Screen Time selections and tokens
+            also remain device-only.
           </p>
           <p>
             Where available in the app, you can delete data using local
             controls. Uninstalling RoamXP removes installed local app data from
-            that device, subject to Apple and device backup behavior.
-          </p>
-          <p>
-            Local app data may also be included in device or iCloud backups
-            depending on your Apple settings. Deleting the app does not
-            guarantee that every copy is permanently erased from every backup.
+            that device, subject to platform backup behavior. Local app data may
+            also be included in device backups depending on your settings.
+            Deleting the app does not guarantee that every copy is permanently
+            erased from every backup.
           </p>
 
-          <h2>3. Apple Permissions</h2>
+          <h2>3. Optional Account and Cloud Save</h2>
           <p>
-            You can control Apple permissions for RoamXP in iOS Settings. Where
-            applicable, that may include:
+            Creating an account is optional. When signed in with Cloud Save
+            enabled, RoamXP may automatically back up allowlisted progress such
+            as XP, goals, rewards, quest/campaign state, journal text, workout
+            and nutrition logs, and related saved user content.
+          </p>
+          <p>
+            You can manage account and Cloud Save settings in the app when
+            Accounts features are available
+            (Profile → Settings → Account &amp; Cloud Save).
+          </p>
+
+          <h2>4. Apple and System Permissions</h2>
+          <p>
+            You can control system permissions for RoamXP in iOS or Android
+            Settings. Where applicable, that may include:
           </p>
           <ul>
-            <li>Health</li>
+            <li>Health (iOS HealthKit step read)</li>
             <li>Photos</li>
             <li>Microphone</li>
             <li>Notifications</li>
-            <li>Screen Time / Family Controls</li>
+            <li>Screen Time / Family Controls (iOS Focus features)</li>
           </ul>
           <p>
-            Disabling a permission may limit the related RoamXP feature. For
-            example, Health access is used to read step count locally; Screen
-            Time / Family Controls authorization is used for Focus features.
-            Selected Screen Time / Family Controls identities and tokens remain
-            local and are not sent to PostHog. Raw HealthKit step values are
-            not sent to PostHog.
+            Disabling a permission may limit the related RoamXP feature.
           </p>
 
-          <h2>4. Product Analytics</h2>
+          <h2>5. Product Analytics</h2>
           <p>
             RoamXP currently uses PostHog for limited anonymous or
-            pseudonymous product analytics. Analytics is not tied to a RoamXP
-            login or account. The PostHog project is configured to discard
-            client IP data.
+            pseudonymous product analytics. Current configuration does not use
+            identify()/alias() account stitching. The PostHog project is
+            configured to discard client IP data.
           </p>
-          <p>RoamXP does not send the following to PostHog:</p>
-          <ul>
-            <li>journal content (text, photos, or audio)</li>
-            <li>raw HealthKit step values</li>
-            <li>Screen Time selections or tokens</li>
-            <li>notification body text</li>
-            <li>full StoreKit receipts</li>
-            <li>precise GPS location</li>
-          </ul>
           <p>
-            Because analytics uses a pseudonymous installation/distinct
-            identifier rather than a RoamXP account, RoamXP may not always be
-            able to reliably identify which analytics events belong to a
-            specific real-world person.
+            RoamXP does not send journal content, raw HealthKit steps, Screen
+            Time selections/tokens, notification bodies, full store receipts, or
+            precise GPS location to PostHog.
           </p>
 
-          <h2>5. Advertising &amp; Tracking</h2>
+          <h2>6. Marketing Email</h2>
           <p>
-            RoamXP currently does not include advertising SDKs. RoamXP does not
-            use IDFA, does not use app data for cross-app advertising tracking,
-            and does not sell personal information for advertising. RoamXP does
-            not request precise GPS / location permission.
+            Marketing email consent defaults to OFF. When signed in and the
+            control is available, you can opt in or out in Account &amp; Cloud
+            Save settings. Cloud Save does not require marketing opt-in.
           </p>
 
-          <h2>6. Privacy Requests</h2>
+          <h2>7. Advertising &amp; Tracking</h2>
+          <p>
+            RoamXP currently does not include advertising SDKs, does not use
+            IDFA for advertising tracking, does not use app data for cross-app
+            advertising tracking, and does not sell personal information for
+            advertising.
+          </p>
+
+          <h2>8. Privacy and Deletion Requests</h2>
           <p>
             You may contact
-            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a> for:
-          </p>
-          <ul>
-            <li>privacy questions</li>
-            <li>requests regarding information RoamXP may hold</li>
-            <li>questions about analytics or local data handling</li>
-          </ul>
-          <p>
-            Because RoamXP currently does not have user accounts and product
-            analytics is pseudonymous, we may not always be able to associate
-            analytics records with a particular real-world person.
+            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a> for
+            privacy questions or requests. To request account and Cloud Save
+            deletion without using the app, use the
+            <a href="../account-deletion/">Account Deletion</a> page. A web
+            email is a verified request process, not an automatic instant wipe.
           </p>
 
-          <h2>7. Contact</h2>
+          <h2>9. Contact</h2>
           <p>
-            For privacy questions or requests, email
-            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>.
+            Operator: Puzzle Tech Studios LLC ·
+            <a href="mailto:puzdevelop@gmail.com">puzdevelop@gmail.com</a>
           </p>
           <p>
-            You can also review the
+            Also see
             <a href="../privacy/">Privacy Policy</a>,
             <a href="../terms/">Terms of Use</a>, and
-            <a href="../support/">Support</a> pages.
+            <a href="../support/">Support</a>.
           </p>
         </article>
       </div>
@@ -155,6 +164,7 @@
           <a href="../terms/">Terms</a>
           <a href="../support/">Support</a>
           <a href="./" aria-current="page">Privacy Choices</a>
+          <a href="../account-deletion/">Delete Account</a>
         </nav>
         <p class="site-footer__meta">© RoamXP. All rights reserved.</p>
       </div>

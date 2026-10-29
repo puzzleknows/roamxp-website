@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://puzzleknows.github.io/roamxp-website/</loc>
+    <loc>https://roamxp.puzdev.com/</loc>
   </url>
   <url>
-    <loc>https://puzzleknows.github.io/roamxp-website/privacy/</loc>
+    <loc>https://roamxp.puzdev.com/privacy/</loc>
   </url>
   <url>
-    <loc>https://puzzleknows.github.io/roamxp-website/terms/</loc>
+    <loc>https://roamxp.puzdev.com/terms/</loc>
   </url>
   <url>
-    <loc>https://puzzleknows.github.io/roamxp-website/support/</loc>
+    <loc>https://roamxp.puzdev.com/support/</loc>
   </url>
   <url>
-    <loc>https://puzzleknows.github.io/roamxp-website/privacy-choices/</loc>
+    <loc>https://roamxp.puzdev.com/privacy-choices/</loc>
+  </url>
+  <url>
+    <loc>https://roamxp.puzdev.com/account-deletion/</loc>
   </url>
 </urlset>
