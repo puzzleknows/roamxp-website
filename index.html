@@ -53,30 +53,35 @@
               - Back (secondary): assets/hero-back.jpg
             -->
             <div class="hero__stack">
-              <div class="hero__phone hero__phone--back">
-                <div class="hero__phone-shell">
-                  <span class="hero__phone-island"></span>
-                  <img
-                    class="hero__phone-screen"
-                    src="assets/hero-back.jpg"
-                    alt=""
-                    width="470"
-                    height="1024"
-                    decoding="async"
-                  />
+              <!-- Reusable phone mockup: .phone > .phone__chrome > (.phone__island + .phone__viewport > img) -->
+              <div class="phone phone--back">
+                <div class="phone__chrome">
+                  <span class="phone__island" aria-hidden="true"></span>
+                  <div class="phone__viewport">
+                    <img
+                      class="phone__img"
+                      src="assets/hero-back.jpg"
+                      alt=""
+                      width="470"
+                      height="1024"
+                      decoding="async"
+                    />
+                  </div>
                 </div>
               </div>
-              <div class="hero__phone hero__phone--front">
-                <div class="hero__phone-shell">
-                  <span class="hero__phone-island"></span>
-                  <img
-                    class="hero__phone-screen"
-                    src="assets/hero-front.jpg"
-                    alt=""
-                    width="470"
-                    height="1024"
-                    decoding="async"
-                  />
+              <div class="phone phone--front">
+                <div class="phone__chrome">
+                  <span class="phone__island" aria-hidden="true"></span>
+                  <div class="phone__viewport">
+                    <img
+                      class="phone__img"
+                      src="assets/hero-front.jpg"
+                      alt=""
+                      width="470"
+                      height="1024"
+                      decoding="async"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
