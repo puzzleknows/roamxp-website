@@ -53,37 +53,35 @@
               - Back (secondary): assets/hero-back.jpg
             -->
             <div class="hero__stack">
-              <!-- Reusable phone mockup: .phone > .phone__chrome > (.phone__island + .phone__viewport > img) -->
-              <div class="phone phone--back">
-                <div class="phone__chrome">
-                  <span class="phone__island" aria-hidden="true"></span>
-                  <div class="phone__viewport">
-                    <img
-                      class="phone__img"
-                      src="assets/hero-back.jpg"
-                      alt=""
-                      width="470"
-                      height="1024"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="phone phone--front">
-                <div class="phone__chrome">
-                  <span class="phone__island" aria-hidden="true"></span>
-                  <div class="phone__viewport">
-                    <img
-                      class="phone__img"
-                      src="assets/hero-front.jpg"
-                      alt=""
-                      width="470"
-                      height="1024"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
+              <!--
+                Transparent PNG phone mockups (alpha outside silhouette):
+                - Desktop front/back: hero-phone-front.png / hero-phone-back.png
+                - Mobile front only:  hero-phone-front-mobile.png (thinner Pro frame)
+              -->
+              <img
+                class="phone phone--back"
+                src="assets/hero-phone-back.png"
+                alt=""
+                width="271"
+                height="548"
+                decoding="async"
+              />
+              <img
+                class="phone phone--front phone--front-lg"
+                src="assets/hero-phone-front.png"
+                alt=""
+                width="271"
+                height="548"
+                decoding="async"
+              />
+              <img
+                class="phone phone--front phone--front-sm"
+                src="assets/hero-phone-front-mobile.png"
+                alt=""
+                width="253"
+                height="530"
+                decoding="async"
+              />
             </div>
           </div>
 
