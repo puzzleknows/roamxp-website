@@ -10,7 +10,7 @@ This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 | Item | Status |
 |------|--------|
 | Smart Links `/go/` `/ig/` `/yt/` `/tt/` `/qr/` | **Live** |
-| Premium minimalist `/go/` redesign | **Live** (approved) |
+| Premium minimalist `/go/` redesign | **Live** (approved) · deploy commit **`c02d5ca`** (`c02d5cac76177aad6f8cdc4f96d6ef938b854b5e`) |
 | App Store + Google Play official badges | **Live** |
 | PostHog project **656002** (`us.i.posthog.com`) | **Live** |
 | Campaign QR print assets | **Live** |
