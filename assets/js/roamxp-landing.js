@@ -255,38 +255,21 @@
     var qrPanel = document.getElementById("desktop-qr");
     if (!iosBtn || !playBtn || !actions) return;
 
-    iosBtn.classList.remove("store-btn--primary", "store-btn--secondary");
-    playBtn.classList.remove("store-btn--primary", "store-btn--secondary");
+    iosBtn.classList.remove("store-badge--primary", "store-btn--primary", "store-btn--secondary");
+    playBtn.classList.remove("store-badge--primary", "store-btn--primary", "store-btn--secondary");
 
     if (deviceOs === "android") {
-      playBtn.classList.add("store-btn--primary");
-      iosBtn.classList.add("store-btn--secondary");
+      playBtn.classList.add("store-badge--primary");
       actions.insertBefore(playBtn, iosBtn);
     } else if (deviceOs === "ios") {
-      iosBtn.classList.add("store-btn--primary");
-      playBtn.classList.add("store-btn--secondary");
+      iosBtn.classList.add("store-badge--primary");
       actions.insertBefore(iosBtn, playBtn);
     } else {
-      iosBtn.classList.add("store-btn--primary");
-      playBtn.classList.add("store-btn--primary");
       actions.insertBefore(iosBtn, playBtn);
     }
 
     if (qrPanel) {
       qrPanel.hidden = deviceOs !== "desktop";
-    }
-
-    var hint = document.getElementById("platform-hint");
-    if (!hint) return;
-    if (deviceOs === "ios") {
-      hint.textContent =
-        "Suggested for your device: App Store. Google Play stays available.";
-    } else if (deviceOs === "android") {
-      hint.textContent =
-        "Suggested for your device: Google Play. App Store stays available.";
-    } else {
-      hint.textContent =
-        "Download on iOS or Android, or scan the QR code with your phone.";
     }
   }
 
@@ -311,9 +294,8 @@
 
     var targetUrl = campaignAwareLandingUrl(attribution);
     if (caption) {
-      caption.textContent = attribution.utm_campaign
-        ? "Scan to open this campaign on your phone"
-        : "Scan to open this download page on your phone";
+      // Keep visitor-facing copy attribution-free; UTMs remain in the encoded URL.
+      caption.textContent = "Scan to open on your phone";
     }
     if (urlLink) {
       urlLink.href = targetUrl;
@@ -388,10 +370,6 @@
         playBtn.href = buildPlayStoreUrl(attribution);
         playBtn.removeAttribute("aria-disabled");
         playBtn.classList.remove("store-btn--soon");
-        var label = playBtn.querySelector(".store-btn__label");
-        if (label) label.textContent = "Google Play";
-        var eye = playBtn.querySelector(".store-btn__eyebrow");
-        if (eye) eye.textContent = "Get it on";
         playBtn.addEventListener("click", function () {
           trackStoreOnce(
             "android",
@@ -423,15 +401,6 @@
     }
   }
 
-  function showCampaignChip(attribution) {
-    var chip = document.getElementById("campaign-chip");
-    if (!chip) return;
-    var source = attribution.utm_source || attribution.link_id;
-    if (!source || source === "(none)") return;
-    chip.hidden = false;
-    chip.textContent = "Via " + String(source).replace(/[_-]+/g, " ");
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     var params = qs();
     var attribution = readAttribution(params);
@@ -443,7 +412,6 @@
     prioritizeButtons(deviceOs);
     wireStores(attribution, deviceOs);
     wireDesktopQr(attribution);
-    showCampaignChip(attribution);
 
     // One landing view per page script execution (blocks duplicate script includes).
     // A full reload intentionally sends a new view for Live Events / analytics.

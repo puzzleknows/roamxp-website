@@ -5,6 +5,16 @@
 Hosted from the **`roamxp-website`** repository (`CNAME: roamxp.puzdev.com`, GitHub Pages).  
 This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 
+## Production status
+
+| Item | Status |
+|------|--------|
+| Smart Links `/go/` `/ig/` `/yt/` `/tt/` `/qr/` | **Live** |
+| Premium minimalist `/go/` redesign | **Live** (approved) |
+| App Store + Google Play official badges | **Live** |
+| PostHog project **656002** (`us.i.posthog.com`) | **Live** |
+| Campaign QR print assets | **Live** |
+
 ## Routes
 
 | Route | Purpose |
@@ -28,64 +38,49 @@ https://roamxp.puzdev.com/qr/
 https://roamxp.puzdev.com/go/?utm_source=instagram&utm_medium=qr&utm_campaign=gta_reel_01
 ```
 
-## Landing behavior
+## `/go/` landing (current design)
 
-- iOS / Android: prioritize the matching store; never hide the other
-- Desktop: both stores + **campaign-aware QR** (encodes the current `/go/` URL including UTMs/`link_id`)
-- App Store live; Google Play live (`com.roamxp.app`) via `playStoreUrl`
-- Rate / Privacy / Terms / Support use this site’s pages + App Store write-review
+Premium, light, Apple-like **download destination** (not a marketing site):
+
+- Official app icon + **RoamXP** name
+- Headline: **Turn Life Into a Game.**
+- Supporting line: Complete real-life quests, level up your character, and unlock rewards.
+- Official App Store + Google Play badges (self-hosted under `assets/badges/`)
+- iOS / Android: prioritize matching store; never hide the other
+- Desktop only: campaign-aware QR (“Scan to open on your phone”)
+- Quiet Premium subscription note; footer **Privacy | Terms | Support**
+- **No** visitor-facing UTM / source chips (attribution stays in PostHog + outbound URLs)
+
+Key files: `go/index.html`, `go/styles.css`, `assets/js/roamxp-landing.js`, `assets/config/site-analytics.js`.
 
 ### Store attribution (Phase 1 vs Phase 2)
 
-**Phase 1 (this release — ship without blocking):**
+**Phase 1 (shipped):**
 
 - Web click tracking via PostHog (`roamxp_landing_viewed`, `roamxp_store_clicked`)
-- Google Play outbound URLs use an encoded `referrer=` param (UTMs + `link_id`) suitable for Install Referrer
-- App Store button works without Apple Campaign Links
+- Google Play outbound URLs use encoded `referrer=` (UTMs + `link_id`) for Install Referrer
+- App Store button works; Apple Campaign `pt`/`ct`/`mt` only when configured
 
-**Phase 2 (documented, not required for this release):**
+**Phase 2 (not blockers):**
 
-1. **Apple Campaign Provider Token** — set `appleCampaignProviderToken` (`pt`) in `assets/config/site-analytics.js` from App Store Connect Campaign Links so `pt` / `ct` / `mt` attach to App Store URLs.
-2. **Android Install Referrer** — read Play Install Referrer in the RoamXP Android app and verify end-to-end in Play Console / analytics before claiming install attribution.
-
-Do **not** claim store installs are attributable from web UTMs alone until Phase 2 is verified.
+1. Set `appleCampaignProviderToken` (`pt`) in `site-analytics.js` from App Store Connect Campaign Links.
+2. Read Play Install Referrer in the Android app and verify before claiming install attribution.
 
 ## PostHog
 
-- **Project:** RoamXP · ID **656002** · host **https://us.i.posthog.com** (same project as the mobile app).
-- **App:** `EXPO_PUBLIC_POSTHOG_PROJECT_TOKEN` + `EXPO_PUBLIC_POSTHOG_HOST` in RoamXP-DEV `.env` / EAS secrets.
-- **Web landing:** `assets/config/site-analytics.js` → `posthogProjectToken` / `posthogHost` / `posthogProjectId`.
-  - This is a PostHog **project** API key for client SDKs, not a personal private API secret.
-- Web events tagged `analytics_surface: web_acquisition`, `platform: web` to stay distinct from app events.
-- Consent: analytics is skipped when Global Privacy Control or Do Not Track is enabled.
-- Deduping: one `roamxp_landing_viewed` per page script execution; store clicks debounced ~800ms.
-- **Production landing never sets `verification_run`.** That property exists only on intentional pre-deploy QA captures.
+- **Project:** RoamXP · ID **656002** · host **https://us.i.posthog.com**
+- **Web:** `assets/config/site-analytics.js` → project token (`phc_…`), not a personal key
+- Tags: `analytics_surface: web_acquisition`, `platform: web`
+- Consent: skipped when GPC or DNT is enabled
+- Deduping: one landing view per script execution; store clicks debounced ~800ms
+- Production landing **never** sets `verification_run`
 
 Events: `roamxp_landing_viewed`, `roamxp_store_clicked`  
-Channel helper: `acquisition_channel` (`instagram` | `youtube` | `tiktok` | `qr` | `campaign` | `direct`)
+Channels: `instagram` | `youtube` | `tiktok` | `qr` | `campaign` | `direct`
 
-### Production dashboards (exclude QA)
+### Exclude QA from dashboards
 
-Pre-deploy verification used properties such as:
-
-- `verification_run` (e.g. `predeploy_20261111T232005Z`)
-- `$lib = roamxp-website-qa`
-- `distinct_id` prefix `web_qa_`
-
-For conversion / funnel insights, filter **out** events where `verification_run` is set (or `$lib = roamxp-website-qa`). Production `/go/` traffic will not include `verification_run`.
-
-### Live Events check (manual)
-
-Open `/go/?utm_source=instagram&link_id=ig` and confirm `roamxp_landing_viewed` / store clicks in PostHog Live events. Do not leave QA `verification_run` filters on production dashboards.
-
-## Funnel (honest)
-
-```
-Landing View → Store Click → App Install → Onboarding → Trial → Paid
-```
-
-Only Landing View + Store Click are implemented on this website.  
-Install / onboarding / trial / paid live in App Store Connect, Play Console, and/or the **app** PostHog project — **not** automatically joined to web clicks (Phase 2).
+Filter **out** `verification_run` is set, or `$lib = roamxp-website-qa`, or `distinct_id` prefix `web_qa_`.
 
 ## QR print assets
 
@@ -93,10 +88,7 @@ Install / onboarding / trial / paid live in App Store Connect, Play Console, and
 brew install qrencode
 python3 -m venv .venv && .venv/bin/pip install pillow zxing-cpp
 .venv/bin/python scripts/generate-roamxp-qr.py
-.venv/bin/python scripts/generate-roamxp-qr.py --campaign gta_reel_01 --source Instagram --medium qr
 ```
-
-Output: `assets/qr/roamxp/` (PNG + SVG, decode-verified against `https://roamxp.puzdev.com/...`).
 
 | Asset | Decoded URL |
 |-------|-------------|
@@ -115,14 +107,6 @@ python3 -m http.server 8090
 # http://127.0.0.1:8090/go/
 ```
 
-## Release readiness (manual deploy)
+## Deploy
 
-**Ready to ship when approved.** Do not auto-deploy.
-
-1. PostHog project token present in `site-analytics.js` (done)
-2. Google Play URL live (done)
-3. App Store button live (done)
-4. QR assets decode to `roamxp.puzdev.com` (done)
-5. Phase 2 items documented above — **not blockers**
-6. Push `roamxp-website` `main` to GitHub Pages when explicitly approved
-7. After deploy: spot-check Live events from a real `/ig/` → `/go/` → store click (no `verification_run`)
+Push `main` on `puzzleknows/roamxp-website` → GitHub Pages → `https://roamxp.puzdev.com`.
