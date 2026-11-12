@@ -1,129 +1,48 @@
 /**
  * RoamXP smart download landing — OS priority, desktop QR, UTM, Apple ct/pt/mt,
  * PostHog acquisition events. Safe with missing analytics config. No forced store redirect.
+ * Store URL building lives in roamxp-store-links.js (shared with /get/).
  */
 (function () {
   "use strict";
 
-  var APP_STORE_BASE =
-    "https://apps.apple.com/us/app/roamxp-habit-tracker-focus/id6821217688";
-  var APP_STORE_RATE =
-    "https://apps.apple.com/us/app/roamxp-habit-tracker-focus/id6821217688?action=write-review";
-  var UTM_KEYS = [
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "utm_content",
-    "utm_term"
-  ];
-  var CANONICAL_ORIGIN = "https://roamxp.puzdev.com";
+  var links = window.RoamXPStoreLinks;
+  if (!links) {
+    return;
+  }
+
+  var APP_STORE_RATE = links.APP_STORE_RATE;
 
   function qs() {
-    try {
-      return new URLSearchParams(window.location.search);
-    } catch (e) {
-      return new URLSearchParams();
-    }
+    return links.readQueryParams();
   }
 
   function cfg() {
-    return window.PUZDEV_ANALYTICS || {};
+    return links.cfg();
   }
 
   function readAttribution(params) {
-    var data = {};
-    UTM_KEYS.forEach(function (key) {
-      var value = params.get(key);
-      if (value) data[key] = value;
-    });
-    var linkId = params.get("link_id");
-    if (linkId) data.link_id = linkId;
-    ["pt", "ct", "mt"].forEach(function (key) {
-      var value = params.get(key);
-      if (value) data[key] = value;
-    });
-    return data;
+    return links.readAttribution(params);
   }
 
   function detectDeviceOs() {
-    var ua = navigator.userAgent || navigator.vendor || "";
-    if (/android/i.test(ua)) return "android";
-    if (
-      /iPad|iPhone|iPod/.test(ua) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
-    ) {
-      return "ios";
-    }
-    return "desktop";
+    return links.detectDeviceOs();
   }
 
   function playStoreUrl() {
-    return String(cfg().playStoreUrl || "").trim();
+    return links.playStoreBaseUrl();
   }
 
-  /**
-   * Google Play install attribution uses the encoded `referrer` query param
-   * (Install Referrer API). Top-level utm_* on play.google.com do NOT by
-   * themselves reach the app. This builds a correct referrer string; install
-   * attribution is still NOT claimed until the app reads Install Referrer and
-   * Play Console / MMP verification confirms it.
-   */
   function buildPlayStoreUrl(attribution) {
-    var base = playStoreUrl();
-    if (!base) return "";
-    try {
-      var url = new URL(base);
-      var referrer = new URLSearchParams();
-      UTM_KEYS.forEach(function (key) {
-        if (attribution[key]) referrer.set(key, attribution[key]);
-      });
-      if (attribution.link_id) referrer.set("link_id", attribution.link_id);
-      var referrerStr = referrer.toString();
-      if (referrerStr) {
-        if (referrerStr.length > 512) {
-          referrerStr = referrerStr.slice(0, 512);
-        }
-        url.searchParams.set("referrer", referrerStr);
-      }
-      return url.toString();
-    } catch (e) {
-      return base;
-    }
+    return links.buildPlayStoreUrl(attribution);
   }
 
   function buildAppStoreUrl(attribution) {
-    var url = new URL(APP_STORE_BASE);
-    var pt =
-      attribution.pt ||
-      String(cfg().appleCampaignProviderToken || "").trim();
-    var mt =
-      attribution.mt ||
-      String(cfg().appleCampaignMediaType || "8").trim() ||
-      "8";
-    var ct =
-      attribution.ct ||
-      attribution.utm_campaign ||
-      attribution.link_id ||
-      "roamxp";
-
-    if (pt) {
-      url.searchParams.set("pt", pt);
-      url.searchParams.set("ct", String(ct).slice(0, 100));
-      url.searchParams.set("mt", mt);
-    }
-    return url.toString();
+    return links.buildAppStoreUrl(attribution);
   }
 
   function analyticsConsentAllowed() {
-    // Honor Global Privacy Control / DNT as an analytics opt-out signal.
-    try {
-      if (navigator.globalPrivacyControl === true) return false;
-      var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      if (dnt === "1" || dnt === "yes") return false;
-    } catch (e) {
-      /* ignore */
-    }
-    return true;
+    return links.analyticsConsentAllowed();
   }
 
   function posthogReady() {
@@ -194,17 +113,7 @@
   }
 
   function channelLabel(attribution) {
-    var link = attribution.link_id || "";
-    var source = (attribution.utm_source || "").toLowerCase();
-    var medium = (attribution.utm_medium || "").toLowerCase();
-    if (link === "ig" || source === "instagram") return "instagram";
-    if (link === "yt" || source === "youtube") return "youtube";
-    if (link === "tt" || source === "tiktok") return "tiktok";
-    if (link.indexOf("qr") === 0 || source === "qr" || medium === "offline" || medium === "qr") {
-      return "qr";
-    }
-    if (attribution.utm_campaign) return "campaign";
-    return "direct";
+    return links.channelLabel(attribution);
   }
 
   function baseProps(attribution, deviceOs) {
@@ -255,18 +164,9 @@
     var qrPanel = document.getElementById("desktop-qr");
     if (!iosBtn || !playBtn || !actions) return;
 
-    iosBtn.classList.remove("store-badge--primary", "store-btn--primary", "store-btn--secondary");
-    playBtn.classList.remove("store-badge--primary", "store-btn--primary", "store-btn--secondary");
-
-    if (deviceOs === "android") {
-      playBtn.classList.add("store-badge--primary");
-      actions.insertBefore(playBtn, iosBtn);
-    } else if (deviceOs === "ios") {
-      iosBtn.classList.add("store-badge--primary");
-      actions.insertBefore(iosBtn, playBtn);
-    } else {
-      actions.insertBefore(iosBtn, playBtn);
-    }
+    iosBtn.classList.remove("store-btn--primary", "store-btn--secondary");
+    playBtn.classList.remove("store-btn--primary", "store-btn--secondary");
+    links.prioritizeStoreActions(deviceOs, iosBtn, playBtn, actions);
 
     if (qrPanel) {
       qrPanel.hidden = deviceOs !== "desktop";
@@ -274,15 +174,7 @@
   }
 
   function campaignAwareLandingUrl(attribution) {
-    var url = new URL(CANONICAL_ORIGIN + "/go/");
-    UTM_KEYS.forEach(function (key) {
-      if (attribution[key]) url.searchParams.set(key, attribution[key]);
-    });
-    if (attribution.link_id) url.searchParams.set("link_id", attribution.link_id);
-    ["pt", "ct", "mt"].forEach(function (key) {
-      if (attribution[key]) url.searchParams.set(key, attribution[key]);
-    });
-    return url.toString();
+    return links.buildGoAbsoluteUrl(attribution);
   }
 
   function wireDesktopQr(attribution) {

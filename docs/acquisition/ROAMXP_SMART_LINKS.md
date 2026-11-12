@@ -10,6 +10,7 @@ This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 | Item | Status |
 |------|--------|
 | Smart Links `/go/` `/ig/` `/yt/` `/tt/` `/qr/` | **Live** |
+| Smart auto-redirect `/get/` | **Live** (controlled release; social routes still use `/go/`) |
 | Premium minimalist `/go/` redesign | **Live** (approved) · deploy commit **`c02d5ca`** (`c02d5cac76177aad6f8cdc4f96d6ef938b854b5e`) |
 | App Store + Google Play official badges | **Live** |
 | PostHog project **656002** (`us.i.posthog.com`) | **Live** |
@@ -19,18 +20,22 @@ This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 
 | Route | Purpose |
 |-------|---------|
-| `/go/` | Canonical smart download landing |
+| `/go/` | Canonical smart download landing (manual store choice + desktop QR) |
+| `/get/` | Smart download: clean mobile browsers → store; in-app / desktop / unknown → `/go/` |
 | `/ig/` | Instagram → `/go/` + default UTMs |
 | `/yt/` | YouTube → `/go/` + default UTMs |
 | `/tt/` | TikTok → `/go/` + default UTMs |
 | `/qr/` | QR / offline → `/go/` + default UTMs |
 
-Short links merge defaults without overwriting explicit query params.
+Short links merge defaults without overwriting explicit query params.  
+`/get/` reuses `assets/js/roamxp-store-links.js` (same App Store / Play URL builders as `/go/`).
 
 ### Examples
 
 ```
 https://roamxp.puzdev.com/go/
+https://roamxp.puzdev.com/get/
+https://roamxp.puzdev.com/get/?utm_source=instagram&utm_medium=bio&utm_campaign=launch&link_id=get_bio
 https://roamxp.puzdev.com/ig/
 https://roamxp.puzdev.com/yt/
 https://roamxp.puzdev.com/tt/
@@ -75,8 +80,21 @@ Key files: `go/index.html`, `go/styles.css`, `assets/js/roamxp-landing.js`, `ass
 - Deduping: one landing view per script execution; store clicks debounced ~800ms
 - Production landing **never** sets `verification_run`
 
-Events: `roamxp_landing_viewed`, `roamxp_store_clicked`  
+Events: `roamxp_landing_viewed`, `roamxp_store_clicked`, `roamxp_smart_redirected` (routing *attempt* from `/get/` — not a confirmed store open or install; never a store-button click)  
+`roamxp_smart_redirected.redirect_mode`: `auto_store` | `in_app_fallback` | `fallback_go`  
 Channels: `instagram` | `youtube` | `tiktok` | `qr` | `campaign` | `direct`
+
+### `/get/` routing rules
+
+| Environment | Action |
+|-------------|--------|
+| iPhone/iPad Safari, Chrome, etc. (not in-app) | `location.replace` → App Store HTTPS |
+| Android Chrome / Samsung Internet (not in-app) | `location.replace` → Play HTTPS + `referrer=` |
+| Instagram / TikTok / YouTube / Facebook / Android `wv` | → `/go/` (manual badges; no forced store hop) |
+| Desktop macOS / Windows / Linux | → `/go/` |
+| Unknown / ambiguous UA | → `/go/` |
+
+Ordinary Mac is never classified as iPad. iPadOS desktop-class UA requires `MacIntel` + `maxTouchPoints > 1`.
 
 ### Exclude QA from dashboards
 
