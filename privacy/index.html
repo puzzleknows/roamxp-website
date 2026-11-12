@@ -357,11 +357,21 @@
 
           <h2>17. Website Privacy</h2>
           <p>
-            Separately from the mobile app, the RoamXP website currently uses no
-            RoamXP analytics SDK, no advertising pixels, and no first-party
-            tracking cookies in the site code. The website does not contain a
-            contact form that collects passwords or one-time codes. Support and
-            account-deletion requests use mailto links.
+            Separately from the mobile app, most RoamXP website pages use no
+            advertising pixels and no contact form that collects passwords or
+            one-time codes. Support and account-deletion requests use mailto
+            links.
+          </p>
+          <p>
+            The download landing pages (such as
+            <a href="/go/">/go/</a> and short entry links) may load PostHog for
+            anonymous acquisition analytics—landing views and store-button
+            clicks—only when a PostHog project token is configured in the
+            website’s public analytics config. When that token is empty,
+            those scripts are not loaded. Analytics on these pages is skipped
+            when the browser signals Global Privacy Control or Do Not Track.
+            Campaign links may include standard UTM parameters. Store-button
+            clicks are not the same as app installs.
           </p>
           <p>
             Hosting and network providers may process ordinary connection

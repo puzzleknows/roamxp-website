@@ -342,26 +342,23 @@ main {
   max-width: none;
   background: transparent;
   border: 0;
-  /* Soft silhouette shadow — keep radius tight to avoid a visible filter box */
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+  /* No CSS filter — drop-shadow/brightness create dark rectangular filter boxes
+     around transparent PNG corners. Depth comes from hero glow + asset shading. */
+  filter: none;
   object-fit: contain;
 }
 
 .phone--back {
-  top: 7%;
+  top: 13%;
   left: 10%;
   width: 40%;
   z-index: 1;
   transform: rotate(-5.5deg);
-  opacity: 0.95;
-  filter:
-    drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
-    brightness(0.95)
-    saturate(0.97);
+  opacity: 0.92;
 }
 
 .phone--front {
-  top: 11%;
+  top: 17%;
   right: 8%;
   left: auto;
   width: 48%;
@@ -457,7 +454,7 @@ main {
     grid-template-columns: minmax(17rem, 0.9fr) minmax(22rem, 1.1fr);
     gap: clamp(1.5rem, 3vw, 2.5rem);
     align-items: start;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.15rem;
   }
 
   .hero__visuals {
@@ -480,13 +477,13 @@ main {
 
   .phone--back {
     width: 41%;
-    top: 6.5%;
+    top: 12.5%;
     left: 9%;
   }
 
   .phone--front {
     width: 49%;
-    top: 10%;
+    top: 16%;
     right: 7%;
   }
 }
@@ -1028,6 +1025,10 @@ body.home .site-footer {
     width: 100%;
     height: auto;
     transform: none;
-    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.38));
+    filter: none;
+  }
+
+  .hero__visuals {
+    margin-bottom: 0.15rem;
   }
 }

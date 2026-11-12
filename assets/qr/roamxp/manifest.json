@@ -1,0 +1,44 @@
+[
+  {
+    "name": "general",
+    "url": "https://roamxp.puzdev.com/go/?utm_source=qr&utm_medium=offline&utm_campaign=roamxp_download&link_id=qr_general",
+    "png": "assets/qr/roamxp/general.png",
+    "svg": "assets/qr/roamxp/general.svg",
+    "verified": true
+  },
+  {
+    "name": "instagram",
+    "url": "https://roamxp.puzdev.com/ig/",
+    "png": "assets/qr/roamxp/instagram.png",
+    "svg": "assets/qr/roamxp/instagram.svg",
+    "verified": true
+  },
+  {
+    "name": "youtube",
+    "url": "https://roamxp.puzdev.com/yt/",
+    "png": "assets/qr/roamxp/youtube.png",
+    "svg": "assets/qr/roamxp/youtube.svg",
+    "verified": true
+  },
+  {
+    "name": "tiktok",
+    "url": "https://roamxp.puzdev.com/tt/",
+    "png": "assets/qr/roamxp/tiktok.png",
+    "svg": "assets/qr/roamxp/tiktok.svg",
+    "verified": true
+  },
+  {
+    "name": "qr_entry",
+    "url": "https://roamxp.puzdev.com/qr/",
+    "png": "assets/qr/roamxp/qr_entry.png",
+    "svg": "assets/qr/roamxp/qr_entry.svg",
+    "verified": true
+  },
+  {
+    "name": "campaign-gta_reel_01",
+    "url": "https://roamxp.puzdev.com/go/?utm_source=instagram&utm_medium=qr&utm_campaign=gta_reel_01&link_id=qr_gta_reel_01",
+    "png": "assets/qr/roamxp/campaign-gta_reel_01.png",
+    "svg": "assets/qr/roamxp/campaign-gta_reel_01.svg",
+    "verified": true
+  }
+]
