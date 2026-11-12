@@ -2,16 +2,18 @@
  * Shared short-link redirect for GitHub Pages directory routes.
  * Merges default UTM / link_id values without overwriting explicit query params.
  *
- * Usage (inline before this file, or data attributes on <html>):
+ * Usage (inline before this file):
  *   window.PUZDEV_SMART_LINK = {
- *     targetPath: "/go/",
+ *     targetPath: "/get/",
  *     defaults: { utm_source: "instagram", utm_medium: "social", utm_campaign: "roamxp_download", link_id: "ig" }
  *   };
+ * Channel routes (/ig|/yt|/tt|/qr) target /get/ (smart store router).
+ * /go/ remains the premium manual fallback download page.
  */
 (function () {
   "use strict";
   var cfg = window.PUZDEV_SMART_LINK || {};
-  var targetPath = cfg.targetPath || "/go/";
+  var targetPath = cfg.targetPath || "/get/";
   var defaults = cfg.defaults || {};
 
   function merge() {

@@ -2,3 +2,7 @@
 node_modules/
 .venv/
 *.log
+test-results/
+playwright-report/
+playwright/.cache/
+blob-report/

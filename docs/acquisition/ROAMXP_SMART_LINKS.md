@@ -1,6 +1,7 @@
 # RoamXP Smart Links, QR & Acquisition Analytics
 
-**Canonical public download destination:** [`https://roamxp.puzdev.com/go/`](https://roamxp.puzdev.com/go/)
+**Canonical smart download entry:** [`https://roamxp.puzdev.com/get/`](https://roamxp.puzdev.com/get/)  
+**Premium fallback download page:** [`https://roamxp.puzdev.com/go/`](https://roamxp.puzdev.com/go/)
 
 Hosted from the **`roamxp-website`** repository (`CNAME: roamxp.puzdev.com`, GitHub Pages).  
 This is the official RoamXP site — **not** `puzdev.com` (corporate site).
@@ -9,98 +10,114 @@ This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 
 | Item | Status |
 |------|--------|
-| Smart Links `/go/` `/ig/` `/yt/` `/tt/` `/qr/` | **Live** |
-| Smart auto-redirect `/get/` | **Live** (controlled release; social routes still use `/go/`) |
-| Premium minimalist `/go/` redesign | **Live** (approved) · deploy commit **`c02d5ca`** (`c02d5cac76177aad6f8cdc4f96d6ef938b854b5e`) |
+| Smart entry `/get/` | **Live** — central acquisition router |
+| Channel routes `/ig/` `/yt/` `/tt/` `/qr/` | **Live → `/get/`** (unified acquisition) |
+| Premium fallback `/go/` | **Live** (design unchanged) |
+| Unify + QA harness deploy | **See commit hash below after push** |
 | App Store + Google Play official badges | **Live** |
 | PostHog project **656002** (`us.i.posthog.com`) | **Live** |
-| Campaign QR print assets | **Live** |
+| Campaign QR print assets | **Live** (paths unchanged; see QR notes) |
 
-## Routes
+## Canonical routing
+
+```
+/ig/  ─┐
+/yt/  ─┼─→  /get/  ─┬─→  App Store   (clean iOS browsers)
+/tt/  ─┤            ├─→  Google Play (clean Android browsers)
+/qr/  ─┘            └─→  /go/        (in-app, desktop, unknown)
+                 /go/   = premium manual download + desktop QR
+```
 
 | Route | Purpose |
 |-------|---------|
-| `/go/` | Canonical smart download landing (manual store choice + desktop QR) |
-| `/get/` | Smart download: clean mobile browsers → store; in-app / desktop / unknown → `/go/` |
-| `/ig/` | Instagram → `/go/` + default UTMs |
-| `/yt/` | YouTube → `/go/` + default UTMs |
-| `/tt/` | TikTok → `/go/` + default UTMs |
-| `/qr/` | QR / offline → `/go/` + default UTMs |
+| `/get/` | **Central smart download entry** — OS routing + attribution |
+| `/go/` | Premium download fallback (badges, desktop QR). Not auto-store. |
+| `/ig/` | Instagram → `/get/` + default UTMs (`link_id=ig`) |
+| `/yt/` | YouTube → `/get/` + default UTMs (`link_id=yt`) |
+| `/tt/` | TikTok → `/get/` + default UTMs (`link_id=tt`) |
+| `/qr/` | QR / offline → `/get/` + default UTMs (`link_id=qr`) |
 
 Short links merge defaults without overwriting explicit query params.  
-`/get/` reuses `assets/js/roamxp-store-links.js` (same App Store / Play URL builders as `/go/`).
+`/get/` and `/go/` share `assets/js/roamxp-store-links.js` (App Store / Play URL builders).
+
+### `/get/` device rules
+
+| Environment | Action |
+|-------------|--------|
+| iPhone/iPad Safari, Chrome (not in-app) | `location.replace` → App Store HTTPS |
+| Android Chrome / Samsung Internet (not in-app) | `location.replace` → Play HTTPS + `referrer=` |
+| Instagram / TikTok / YouTube / Facebook / Android `wv` | → `/go/` (manual badges) |
+| Desktop macOS / Windows / Linux | → `/go/` |
+| Unknown / ambiguous UA | → `/go/` |
+
+Ordinary Mac is never classified as iPad. iPadOS desktop-class UA requires `MacIntel` + `maxTouchPoints > 1`.  
+No custom URI schemes, no redirect loops (`/get/` never targets `/get/`).
 
 ### Examples
 
 ```
-https://roamxp.puzdev.com/go/
 https://roamxp.puzdev.com/get/
-https://roamxp.puzdev.com/get/?utm_source=instagram&utm_medium=bio&utm_campaign=launch&link_id=get_bio
 https://roamxp.puzdev.com/ig/
 https://roamxp.puzdev.com/yt/
 https://roamxp.puzdev.com/tt/
 https://roamxp.puzdev.com/qr/
-https://roamxp.puzdev.com/go/?utm_source=instagram&utm_medium=qr&utm_campaign=gta_reel_01
+https://roamxp.puzdev.com/get/?utm_source=instagram&utm_medium=bio&utm_campaign=launch&link_id=get_bio
+https://roamxp.puzdev.com/go/
 ```
 
-## `/go/` landing (current design)
+## `/go/` landing (unchanged design)
 
-Premium, light, Apple-like **download destination** (not a marketing site):
+Premium, light download destination:
 
-- Official app icon + **RoamXP** name
-- Headline: **Turn Life Into a Game.**
-- Supporting line: Complete real-life quests, level up your character, and unlock rewards.
-- Official App Store + Google Play badges (self-hosted under `assets/badges/`)
-- iOS / Android: prioritize matching store; never hide the other
-- Desktop only: campaign-aware QR (“Scan to open on your phone”)
-- Quiet Premium subscription note; footer **Privacy | Terms | Support**
-- **No** visitor-facing UTM / source chips (attribution stays in PostHog + outbound URLs)
+- Official app icon + **RoamXP**
+- **Turn Life Into a Game.**
+- Official App Store + Google Play badges
+- Desktop campaign-aware QR; mobile QR hidden
+- Footer Privacy | Terms | Support
 
-Key files: `go/index.html`, `go/styles.css`, `assets/js/roamxp-landing.js`, `assets/config/site-analytics.js`.
+## Attribution
 
-### Store attribution (Phase 1 vs Phase 2)
+Preserved end-to-end on channel → `/get/` → store or `/go/`:
 
-**Phase 1 (shipped):**
+- `utm_source` `utm_medium` `utm_campaign` `utm_content` `utm_term`
+- `link_id`
+- Google Play Install Referrer via encoded `referrer=`
+- Apple `pt` / `ct` / `mt` when configured (`appleCampaignProviderToken` or query `pt`)
 
-- Web click tracking via PostHog (`roamxp_landing_viewed`, `roamxp_store_clicked`)
-- Google Play outbound URLs use encoded `referrer=` (UTMs + `link_id`) for Install Referrer
-- App Store button works; Apple Campaign `pt`/`ct`/`mt` only when configured
+## PostHog acquisition reporting
 
-**Phase 2 (not blockers):**
+| Event | Meaning | Do **not** treat as |
+|-------|---------|---------------------|
+| `roamxp_smart_redirected` | Automatic `/get/` routing **attempt** (`redirect_mode`, `destination_store`, `device_os`, UTMs) | Install, store open confirmed, or button click |
+| `roamxp_landing_viewed` | `/go/` landing page view | Install |
+| `roamxp_store_clicked` | Manual badge/button click on `/go/` (or rate link) | Automatic redirect |
 
-1. Set `appleCampaignProviderToken` (`pt`) in `site-analytics.js` from App Store Connect Campaign Links.
-2. Read Play Install Referrer in the Android app and verify before claiming install attribution.
+`redirect_mode`: `auto_store` | `in_app_fallback` | `fallback_go`  
+Tags: `analytics_surface: web_acquisition`, `platform: web`  
+Consent: skipped when GPC or DNT is enabled. Never block navigation for analytics.
 
-## PostHog
+### Dashboard changes recommended
 
-- **Project:** RoamXP · ID **656002** · host **https://us.i.posthog.com**
-- **Web:** `assets/config/site-analytics.js` → project token (`phc_…`), not a personal key
-- Tags: `analytics_surface: web_acquisition`, `platform: web`
-- Consent: skipped when GPC or DNT is enabled
-- Deduping: one landing view per script execution; store clicks debounced ~800ms
-- Production landing **never** sets `verification_run`
-
-Events: `roamxp_landing_viewed`, `roamxp_store_clicked`, `roamxp_smart_redirected` (routing *attempt* from `/get/` — not a confirmed store open or install; never a store-button click)  
-`roamxp_smart_redirected.redirect_mode`: `auto_store` | `in_app_fallback` | `fallback_go`  
-Channels: `instagram` | `youtube` | `tiktok` | `qr` | `campaign` | `direct`
-
-### `/get/` routing rules
-
-| Environment | Action |
-|-------------|--------|
-| iPhone/iPad Safari, Chrome, etc. (not in-app) | `location.replace` → App Store HTTPS |
-| Android Chrome / Samsung Internet (not in-app) | `location.replace` → Play HTTPS + `referrer=` |
-| Instagram / TikTok / YouTube / Facebook / Android `wv` | → `/go/` (manual badges; no forced store hop) |
-| Desktop macOS / Windows / Linux | → `/go/` |
-| Unknown / ambiguous UA | → `/go/` |
-
-Ordinary Mac is never classified as iPad. iPadOS desktop-class UA requires `MacIntel` + `maxTouchPoints > 1`.
-
-### Exclude QA from dashboards
-
-Filter **out** `verification_run` is set, or `$lib = roamxp-website-qa`, or `distinct_id` prefix `web_qa_`.
+1. **Separate funnels:** routing attempts (`roamxp_smart_redirected`) vs manual clicks (`roamxp_store_clicked`) vs landing views (`roamxp_landing_viewed`).
+2. **Do not** chart `roamxp_smart_redirected` as installs or “store opens.”
+3. After channel routes use `/get/`, expect **more** `roamxp_smart_redirected` and **fewer** direct `/go/` views from social (in-app still lands on `/go/`).
+4. Break down `roamxp_smart_redirected` by `redirect_mode` and `acquisition_channel` (`instagram`/`youtube`/`tiktok`/`qr`/…).
+5. Continue excluding QA: `verification_run` set, `$lib = roamxp-website-qa`, or `distinct_id` prefix `web_qa_`.
 
 ## QR print assets
+
+**Do not regenerate** unless URLs in the PNG payloads must change. Published codes stay valid:
+
+| Asset | Encoded URL | After unify |
+|-------|-------------|-------------|
+| `instagram.png` | `/ig/` | `/ig/` → `/get/` → store or `/go/` |
+| `youtube.png` | `/yt/` | same pattern |
+| `tiktok.png` | `/tt/` | same pattern |
+| `qr_entry.png` | `/qr/` | `/qr/` → `/get/` → … |
+| `general.png` | `/go/?…&link_id=qr_general` | Still opens `/go/` directly (bypass `/get/`) |
+| `campaign-gta_reel_01.png` | `/go/?utm_…&link_id=qr_gta_reel_01` | Still opens `/go/` directly |
+
+Regenerate only if you intentionally want printed `general` / campaign codes to enter via `/get/` instead.
 
 ```bash
 brew install qrencode
@@ -108,22 +125,16 @@ python3 -m venv .venv && .venv/bin/pip install pillow zxing-cpp
 .venv/bin/python scripts/generate-roamxp-qr.py
 ```
 
-| Asset | Decoded URL |
-|-------|-------------|
-| `general.png` | `/go/?…&link_id=qr_general` |
-| `instagram.png` | `/ig/` |
-| `youtube.png` | `/yt/` |
-| `tiktok.png` | `/tt/` |
-| `qr_entry.png` | `/qr/` |
-| `campaign-gta_reel_01.png` | `/go/?utm_source=instagram&utm_medium=qr&utm_campaign=gta_reel_01&link_id=qr_gta_reel_01` |
-
-## Local preview
+## Automated QA
 
 ```bash
 cd roamxp-website
-python3 -m http.server 8090
-# http://127.0.0.1:8090/go/
+npm ci
+npm test                 # local Chromium suite
+npm run test:smoke:prod  # read-only live smoke; PostHog blocked
 ```
+
+See `tests/README.md`. Simulation ≠ physical-device store opening.
 
 ## Deploy
 
