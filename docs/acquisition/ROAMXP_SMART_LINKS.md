@@ -13,7 +13,7 @@ This is the official RoamXP site — **not** `puzdev.com` (corporate site).
 | Smart entry `/get/` | **Live** — central acquisition router |
 | Channel routes `/ig/` `/yt/` `/tt/` `/qr/` | **Live → `/get/`** (unified acquisition) |
 | Premium fallback `/go/` | **Live** (design unchanged) |
-| Unify + QA harness deploy | **See commit hash below after push** |
+| Unify + QA harness deploy | **`d7e4f90`** (`d7e4f90579aa9d998930facbd4756ab0c923aa40`) |
 | App Store + Google Play official badges | **Live** |
 | PostHog project **656002** (`us.i.posthog.com`) | **Live** |
 | Campaign QR print assets | **Live** (paths unchanged; see QR notes) |
