@@ -42,7 +42,8 @@ concurrency:
 jobs:
   playwright:
     name: Playwright Smart Links
-    runs-on: ubuntu-latest
+    # Pin 24.04: ubuntu-latest moved to 26.04 where Playwright --with-deps packages are missing.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Checkout
