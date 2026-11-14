@@ -149,6 +149,37 @@ test.describe("Channel routes unify through /get/", () => {
     expect(url.searchParams.get("utm_source")).toBe("instagram");
     expect(url.searchParams.get("link_id")).toBe("ig");
     await expect(page.locator("#btn-app-store")).toBeVisible();
+    await expect(page.locator("#ios-inapp-panel")).toBeVisible();
+    await expect(page.locator("#btn-app-store-cta")).toBeVisible();
+    await context.close();
+  });
+
+  test("/tt/ TikTok iOS in-app → /go/ with tt attribution + App Store CTA", async ({
+    browser
+  }) => {
+    const context = await browser.newContext({
+      userAgent:
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 BytedanceWebview/d8a0c1 TikTok 33.0.0",
+      isMobile: true,
+      hasTouch: true,
+      viewport: { width: 390, height: 844 }
+    });
+    const page = await context.newPage();
+    await blockAndCapturePosthog(page);
+    await page.goto("/tt/", { waitUntil: "domcontentloaded" });
+    for (let i = 0; i < 50 && !/\/go\//.test(page.url()); i++) {
+      await page.waitForTimeout(100);
+    }
+    expect(page.url()).toContain("/go/");
+    const url = new URL(page.url());
+    expect(url.searchParams.get("utm_source")).toBe("tiktok");
+    expect(url.searchParams.get("link_id")).toBe("tt");
+    await expect(page.locator("#ios-inapp-panel")).toBeVisible();
+    await expect(page.locator("#btn-app-store-cta")).toContainText(
+      "Open in the App Store"
+    );
+    const href = await page.locator("#btn-app-store-cta").getAttribute("href");
+    expect(href).toContain("apps.apple.com");
     await context.close();
   });
 

@@ -65,7 +65,7 @@ https://roamxp.puzdev.com/get/?utm_source=instagram&utm_medium=bio&utm_campaign=
 https://roamxp.puzdev.com/go/
 ```
 
-## `/go/` landing (unchanged design)
+## `/go/` landing
 
 Premium, light download destination:
 
@@ -73,7 +73,10 @@ Premium, light download destination:
 - **Turn Life Into a Game.**
 - Official App Store + Google Play badges
 - Desktop campaign-aware QR; mobile QR hidden
+- **iOS in-app browsers** (TikTok / Instagram / Facebook / similar): same-tab **Open in the App Store** CTA + short “Open in Safari” steps. Desktop and Android layouts stay badge/QR-first.
 - Footer Privacy | Terms | Support
+
+TikTok (and similar) iOS WebViews often block `target=_blank` App Store hops. The site cannot tell which TikTok *account* opened the link — only the in-app container UA — so the fallback is container-based, not account-based.
 
 ## Attribution
 

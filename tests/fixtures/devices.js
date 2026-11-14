@@ -78,6 +78,16 @@ const DEVICES = [
     viewport: { width: 390, height: 844 }
   },
   {
+    id: "tiktok_ios",
+    label: "TikTok in-app (iOS)",
+    expect: "go",
+    userAgent:
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 BytedanceWebview/d8a0c1 TikTok 33.0.0",
+    isMobile: true,
+    hasTouch: true,
+    viewport: { width: 390, height: 844 }
+  },
+  {
     id: "tiktok_android",
     label: "TikTok in-app (Android)",
     expect: "go",

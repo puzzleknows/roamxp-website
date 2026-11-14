@@ -103,4 +103,83 @@ test.describe("/go/ landing regressions", () => {
     expect(scripts.some((u) => u.includes("roamxp-store-links.js"))).toBeTruthy();
     expect(scripts.some((u) => u.includes("roamxp-landing.js"))).toBeTruthy();
   });
+
+  test("desktop keeps badges + QR and hides iOS in-app panel", async ({
+    page
+  }) => {
+    await blockAndCapturePosthog(page);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(`/go/${QS}`, { waitUntil: "domcontentloaded" });
+    await expect(page.locator("#ios-inapp-panel")).toBeHidden();
+    await expect(page.locator("#btn-app-store")).toBeVisible();
+    await expect(page.locator("#btn-play-store")).toBeVisible();
+    await expect(page.locator("#desktop-qr")).toBeVisible();
+    expect(await page.locator("#btn-app-store").getAttribute("target")).toBe(
+      "_blank"
+    );
+  });
+
+  test("TikTok iOS shows App Store CTA + Safari steps; same-tab store link", async ({
+    browser
+  }) => {
+    const context = await browser.newContext({
+      userAgent:
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 BytedanceWebview/d8a0c1 TikTok 33.0.0",
+      isMobile: true,
+      hasTouch: true,
+      viewport: { width: 390, height: 844 }
+    });
+    const page = await context.newPage();
+    await blockAndCapturePosthog(page);
+    await page.goto(
+      "/go/?utm_source=tiktok&utm_medium=social&utm_campaign=roamxp_download&link_id=tt",
+      { waitUntil: "domcontentloaded" }
+    );
+
+    await expect(page.locator("#ios-inapp-panel")).toBeVisible();
+    await expect(page.locator("#btn-app-store-cta")).toBeVisible();
+    await expect(page.locator("#btn-app-store-cta")).toContainText(
+      "Open in the App Store"
+    );
+    await expect(page.locator("#ios-inapp-steps")).toContainText(
+      "Open in Safari"
+    );
+    await expect(page.locator("#desktop-qr")).toBeHidden();
+
+    const cta = page.locator("#btn-app-store-cta");
+    const badge = page.locator("#btn-app-store");
+    const ctaHref = await cta.getAttribute("href");
+    const badgeHref = await badge.getAttribute("href");
+    expect(ctaHref).toContain("apps.apple.com");
+    expect(badgeHref).toContain("apps.apple.com");
+    expect(await cta.getAttribute("target")).toBeNull();
+    expect(await badge.getAttribute("target")).toBeNull();
+
+    await expect(page.locator("#btn-play-store")).toBeVisible();
+    await context.close();
+  });
+
+  test("Android TikTok keeps Play badge and hides iOS in-app panel", async ({
+    browser
+  }) => {
+    const context = await browser.newContext({
+      userAgent:
+        "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/120.0.0.0 Mobile Safari/537.36 TikTok 32.0.0",
+      isMobile: true,
+      hasTouch: true,
+      viewport: { width: 412, height: 915 }
+    });
+    const page = await context.newPage();
+    await blockAndCapturePosthog(page);
+    await page.goto(
+      "/go/?utm_source=tiktok&utm_medium=social&utm_campaign=roamxp_download&link_id=tt",
+      { waitUntil: "domcontentloaded" }
+    );
+    await expect(page.locator("#ios-inapp-panel")).toBeHidden();
+    await expect(page.locator("#btn-play-store")).toBeVisible();
+    const play = await page.locator("#btn-play-store").getAttribute("href");
+    expect(play).toContain("play.google.com");
+    expect(play).toContain("referrer=");
+    await context.close();
+  });
 });

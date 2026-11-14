@@ -170,6 +170,99 @@ main {
   text-wrap: pretty;
 }
 
+/* iOS in-app (TikTok/Instagram/…) App Store handoff fallback */
+.ios-inapp {
+  margin-top: var(--space-5);
+  width: 100%;
+  max-width: 22.5rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.ios-inapp[hidden] {
+  display: none !important;
+}
+
+.ios-inapp__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 20rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.85rem;
+  background: var(--rx-ink);
+  color: var(--rx-surface);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.ios-inapp__cta:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.ios-inapp__lead {
+  margin: 0;
+  width: 100%;
+  color: var(--rx-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.ios-inapp__steps {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 20rem;
+  list-style: none;
+  counter-reset: ios-step;
+  color: var(--rx-ink);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.ios-inapp__steps li {
+  position: relative;
+  padding: 0.35rem 0 0.35rem 1.85rem;
+}
+
+.ios-inapp__steps li::before {
+  content: counter(ios-step);
+  counter-increment: ios-step;
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--rx-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35rem;
+  text-align: center;
+}
+
+body.ios-inapp-active .store-actions {
+  margin-top: var(--space-4);
+}
+
 .store-actions {
   margin-top: var(--space-5);
   width: 100%;
@@ -463,7 +556,8 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .store-badge {
+  .store-badge,
+  .ios-inapp__cta {
     transition: none;
   }
 }

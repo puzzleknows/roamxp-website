@@ -29,6 +29,10 @@
     return links.detectDeviceOs();
   }
 
+  function detectInAppBrowser() {
+    return links.detectInAppBrowser();
+  }
+
   function playStoreUrl() {
     return links.playStoreBaseUrl();
   }
@@ -116,7 +120,7 @@
     return links.channelLabel(attribution);
   }
 
-  function baseProps(attribution, deviceOs) {
+  function baseProps(attribution, deviceOs, inAppBrowser) {
     return {
       product: "roamxp",
       analytics_surface: "web_acquisition",
@@ -125,6 +129,7 @@
       landing_page: "/go/",
       device_os: deviceOs,
       acquisition_channel: channelLabel(attribution),
+      in_app_browser: inAppBrowser || "(none)",
       referrer: document.referrer || "(direct)",
       utm_source: attribution.utm_source || "(none)",
       utm_medium: attribution.utm_medium || "(none)",
@@ -134,6 +139,75 @@
       link_id: attribution.link_id || "(none)",
       apple_ct: attribution.ct || attribution.utm_campaign || attribution.link_id || "(none)"
     };
+  }
+
+  /**
+   * TikTok/Instagram/Facebook iOS WebViews often block target=_blank App Store hops.
+   * Keep the branded /go/ page, use a same-tab App Store CTA, and show Safari steps.
+   * No account-specific detection — only container UA (in_app_browser).
+   */
+  function wireIosInAppFallback(deviceOs, inAppBrowser) {
+    var panel = document.getElementById("ios-inapp-panel");
+    var cta = document.getElementById("btn-app-store-cta");
+    var lead = document.getElementById("ios-inapp-lead");
+    var steps = document.getElementById("ios-inapp-steps");
+    var iosBtn = document.getElementById("btn-app-store");
+    var active = deviceOs === "ios" && !!inAppBrowser;
+
+    if (!panel) return active;
+
+    if (!active) {
+      panel.hidden = true;
+      document.body.classList.remove("ios-inapp-active");
+      return false;
+    }
+
+    panel.hidden = false;
+    document.body.classList.add("ios-inapp-active");
+
+    if (lead) {
+      if (inAppBrowser === "tiktok") {
+        lead.textContent =
+          "TikTok’s browser may block the App Store. Tap below, or open in Safari.";
+      } else if (inAppBrowser === "instagram") {
+        lead.textContent =
+          "Instagram’s browser may block the App Store. Tap below, or open in Safari.";
+      } else {
+        lead.textContent =
+          "This in-app browser may block the App Store. Tap below, or open in Safari.";
+      }
+    }
+
+    if (steps) {
+      if (inAppBrowser === "tiktok") {
+        steps.innerHTML =
+          "<li>Tap <strong>···</strong> (or Share) in TikTok</li>" +
+          "<li>Choose <strong>Open in Safari</strong> / <strong>Open in Browser</strong></li>" +
+          "<li>Download RoamXP from there</li>";
+      } else if (inAppBrowser === "instagram") {
+        steps.innerHTML =
+          "<li>Tap <strong>···</strong> in the top right</li>" +
+          "<li>Choose <strong>Open in Safari</strong> / <strong>Open in external browser</strong></li>" +
+          "<li>Download RoamXP from there</li>";
+      } else {
+        steps.innerHTML =
+          "<li>Open the browser menu (<strong>···</strong>)</li>" +
+          "<li>Choose <strong>Open in Safari</strong></li>" +
+          "<li>Download RoamXP from there</li>";
+      }
+    }
+
+    // Same-tab HTTPS handoff is more reliable than target=_blank inside WebViews.
+    if (iosBtn) {
+      iosBtn.removeAttribute("target");
+      iosBtn.rel = "noopener noreferrer";
+    }
+    if (cta && iosBtn) {
+      cta.href = iosBtn.href;
+      cta.removeAttribute("target");
+    }
+
+    return true;
   }
 
   function track(eventName, props) {
@@ -220,26 +294,35 @@
     mount.appendChild(img);
   }
 
-  function wireStores(attribution, deviceOs) {
+  function wireStores(attribution, deviceOs, inAppBrowser) {
     var iosBtn = document.getElementById("btn-app-store");
+    var iosCta = document.getElementById("btn-app-store-cta");
     var playBtn = document.getElementById("btn-play-store");
     var rateLink = document.getElementById("rate-roamxp");
-    var propsBase = baseProps(attribution, deviceOs);
+    var propsBase = baseProps(attribution, deviceOs, inAppBrowser);
     var playUrl = playStoreUrl();
+    var appStoreUrl = buildAppStoreUrl(attribution);
+
+    function onIosStoreClick() {
+      trackStoreOnce(
+        "ios",
+        "roamxp_store_clicked",
+        Object.assign({}, propsBase, {
+          destination_store: "ios",
+          store_status: "available",
+          funnel_step: "store_click"
+        })
+      );
+    }
 
     if (iosBtn) {
-      iosBtn.href = buildAppStoreUrl(attribution);
-      iosBtn.addEventListener("click", function () {
-        trackStoreOnce(
-          "ios",
-          "roamxp_store_clicked",
-          Object.assign({}, propsBase, {
-            destination_store: "ios",
-            store_status: "available",
-            funnel_step: "store_click"
-          })
-        );
-      });
+      iosBtn.href = appStoreUrl;
+      iosBtn.addEventListener("click", onIosStoreClick);
+    }
+
+    if (iosCta) {
+      iosCta.href = appStoreUrl;
+      iosCta.addEventListener("click", onIosStoreClick);
     }
 
     if (rateLink) {
@@ -297,12 +380,14 @@
     var params = qs();
     var attribution = readAttribution(params);
     var deviceOs = detectDeviceOs();
+    var inAppBrowser = detectInAppBrowser();
     var ph = posthogReady();
 
     if (ph) loadPostHog(ph);
 
     prioritizeButtons(deviceOs);
-    wireStores(attribution, deviceOs);
+    wireStores(attribution, deviceOs, inAppBrowser);
+    wireIosInAppFallback(deviceOs, inAppBrowser);
     wireDesktopQr(attribution);
 
     // One landing view per page script execution (blocks duplicate script includes).
@@ -311,7 +396,7 @@
       window.__puzdevRoamxpViewSent = true;
       track(
         "roamxp_landing_viewed",
-        Object.assign({}, baseProps(attribution, deviceOs), {
+        Object.assign({}, baseProps(attribution, deviceOs, inAppBrowser), {
           funnel_step: "landing_view"
         })
       );

@@ -73,7 +73,14 @@
     var ua = userAgent || global.navigator.userAgent || "";
     if (/Instagram/i.test(ua)) return "instagram";
     if (/\bFBAN\b|\bFBAV\b|FB_IAB|FBOS|FBIOS/i.test(ua)) return "facebook";
-    if (/TikTok|musical_ly|BytedanceWebview|ByteLocale/i.test(ua)) return "tiktok";
+    // TikTok / Douyin / legacy musical.ly WebViews (UA varies by app build)
+    if (
+      /TikTok|musical_ly|BytedanceWebview|ByteLocale|TTWebView|\bAweme\b/i.test(
+        ua
+      )
+    ) {
+      return "tiktok";
+    }
     if (/YouTube\b|YTApp\b/i.test(ua)) return "youtube";
     // Android WebView marker used by many social containers
     if (/; wv\)/i.test(ua)) return "webview";
